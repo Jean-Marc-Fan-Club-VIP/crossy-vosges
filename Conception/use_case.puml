@@ -1,0 +1,73 @@
+@startuml usecase
+left to right direction
+
+package Démarrage {
+    actor "Joueur" as player
+    usecase "Menu options" as options
+    usecase "Activer/Désactiver le son" as sound
+    usecase "Classement par difficulté" as leaderboard
+    usecase "Choix difficulté" as difficulty
+    usecase "Quitter" as leaveGame
+    usecase "Jouer" as jouer
+}
+player --> jouer
+player --> difficulty
+player --> leaveGame
+player --> leaderboard
+player --> options
+options ..> sound: <<include>>
+
+newpage 
+left to right direction
+
+package Jeu {
+    actor "Joueur" as player
+    usecase "Menu pause" as pause
+    usecase "Menu options" as options
+    usecase "Visualiser infos partie" as summary
+    usecase "Recommencer" as restart
+    usecase "Quitter" as leave
+    usecase "Continuer" as continue
+    usecase "Déplacer le personnage" as play
+    usecase "Activer/Désactiver le son" as sound
+    usecase "Visualiser temps écoulé" as elapsedTime
+    usecase "Visualiser score en cours" as currentScore
+    usecase "Visualiser score à battre" as maxScore
+}
+
+player --> play
+player --> summary
+player --> pause
+pause ..> options: <<include>>
+pause ..> continue: <<extends>>
+pause ..> restart: <<extends>>
+pause ..> leave: <<extends>>
+options ..> sound: <<include>>
+summary ..> elapsedTime: <<include>>
+summary ..> currentScore: <<include>>
+summary ..> maxScore: <<include>>
+
+note left of pause
+    Met le jeu en pause
+end note
+
+newpage
+left to right direction
+
+package GameOver {
+    actor "Joueur" as player
+    usecase "Recommencer" as restart
+    usecase "Quitter" as leave
+    usecase "Visualiser récapitulatif partie" as summary
+    usecase "Visualiser temps écoulé" as elapsedTime
+    usecase "Visualiser score partie" as currentScore
+    usecase "Visualiser score à battre" as maxScore
+}
+
+player --> summary
+player --> restart
+player --> leave
+summary ..> elapsedTime: <<include>>
+summary ..> currentScore: <<include>>
+summary ..> maxScore: <<include>>
+@enduml
