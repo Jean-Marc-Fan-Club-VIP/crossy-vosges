@@ -1,0 +1,41 @@
+@startgantt gantt
+
+Project starts 2023-12-04
+2024-05-17 is colored in red
+2023-12-04 is colored lime
+2024-01-01 is colored lightblue
+
+[Create Unity project] starts 2023-12-04 and requires 1 days
+[Create use case diagram] starts 2023-12-04 and requires 2 days
+[Create a mockup] starts 2023-12-04 and ends 2023-12-31
+[Watch Unity tutorials] starts 2023-12-04 and requires 50 days
+[Define tasks] starts 2023-12-04 and ends 2023-12-18
+[Create the Gantt diagram] starts at [Define tasks]'s end
+[Create the Gantt diagram] requires 5 days
+
+[Create the activity diagram] starts 2023-12-19 and requires 10 days
+[Create the class diagram] starts 2023-12-14 and ends 2023-12-23
+
+[Find the game theme] starts 2023-12-04 and ends 2023-12-31
+
+[Character move logic] starts 2023-12-04 and ends 2023-12-05
+
+[Interfaces and menus] starts 2023-12-04 and ends 2023-12-05
+[Character collisions and interactions with terrain] starts 2023-12-04 and ends 2023-12-05
+[Game timer] starts 2023-12-04 and ends 2023-12-05
+
+[White boxing (blocking) assets] starts 2023-12-04 and ends 2023-12-05
+[Modelling final assets] starts at [White boxing (blocking) assets]'s end
+[Modelling final assets] requires 10 days
+
+[Procedural map generation] starts 2023-12-04 and ends 2023-12-05
+[Character pathfinding] starts 2023-12-04 and ends 2023-12-05
+[Determine player's score] starts 2023-12-04 and ends 2023-12-05
+[Coins and coin counter] starts 2023-12-04 and ends 2023-12-05
+[Save the scores] starts 2023-12-04 and ends 2023-12-05
+[Game audio] starts 2023-12-04 and ends 2023-12-05
+
+[Polish game] starts 2023-12-04 and ends 2024-05-17
+[Preparing presentation] ends 2024-05-17 and requires 15 days
+
+@endgantt
