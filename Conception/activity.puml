@@ -1,73 +1,32 @@
 @startuml activity
 
-start
-
-while (Jeu en cours ?) is (Oui)
-
-if ()
-    :Jouer>
-    note
-        Processus Jeu
-    end note
-endif
-
-if ()
-    :Accéder aux paramètres>
-    note
-        Processus Paramètres
-    end note
-endif
-
-if ()
-    :Sélectionner la difficulté>
-    note
-        Processus Difficulté
-    end note
-endif
-
-if ()
-    :Consulter le classement>
-    note
-        Processus Classement
-    end note
-endif
-
-if ()
-    :Quitter;
-endif
-
-endwhile (Non)
-
-stop
-
 
 partition "**Processus** Jeu" {
     start
 
-    while (Joueur en vie ?) is (Oui)
-        if ()
-            :Mettre le jeu en pause>
-            note
-                Processus Pause
-            end note
-        endif
+    :Déplacer le personnage;
 
-        fork
-            :Déplacer le personnage sur entrées utilisateur;
-        fork again
-            :Déplacer les objets du monde automatiquement;
-        fork again
-            if (Collision ?) then (Oui)
-                if (Objet est une pièce ?) then (Oui)
-                    :Ajouter la pièce au compteur;
-                    :Retirer la pièce du monde;
-                else (Non)
-                    :Eliminer le joueur;
-                endif
+    while (Joueur en vie ?) is (Oui)
+        :Mettre le jeu en pause>
+        note
+            Optionnel :
+            ====
+            Processus Pause
+        end note
+
+        :Déplacer le personnage;
+
+        if (Collision ?) then (Oui)
+            if (Objet est une pièce ?) then (Oui)
+                :Ajouter la pièce au compteur;
+                :Retirer la pièce du monde;
+            elseif (Elément non dangereux (bloquant) ?) then (Oui) 
+                :Annuler le déplacement;
             else (Non)
+                :Eliminer le joueur;
             endif
-        end merge
-        
+        else (Non)
+        endif
         
     endwhile (Non)
 
@@ -76,53 +35,7 @@ partition "**Processus** Jeu" {
         Processus Fin
     end note
 
-    end
+    stop
 }
-
-partition "**Processus** Pause" {
-    start
-
-    :Accéder aux paramètres>
-    note
-        Processus Paramètres
-    end note
-    :Reprendre le jeu;
-    :Recommencer;
-    :Quitter;
-
-    end
-}
-
-partition "**Processus** Fin" {
-    start
-
-    :Rejouer;
-    note
-        Processus Jeu
-    end note
-    :Quitter au menu principal;
-    
-    end
-}
-
-partition "**Processus** Paramètres" {
-    start
-    
-    end
-}
-
-partition "**Processus** Difficulté" {
-    start
-    
-    end
-}
-
-partition "**Processus** Classement" {
-    start
-
-    end
-}
-
-
 
 @enduml
