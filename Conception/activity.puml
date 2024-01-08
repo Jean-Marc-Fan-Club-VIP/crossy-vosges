@@ -1,0 +1,41 @@
+@startuml activity
+
+
+partition "**Processus** Jeu" {
+    start
+
+    :Déplacer le personnage;
+
+    while (Joueur en vie ?) is (Oui)
+        :Mettre le jeu en pause>
+        note
+            Optionnel :
+            ====
+            Processus Pause
+        end note
+
+        :Déplacer le personnage;
+
+        if (Collision ?) then (Oui)
+            if (Objet est une pièce ?) then (Oui)
+                :Ajouter la pièce au compteur;
+                :Retirer la pièce du monde;
+            elseif (Elément non dangereux (bloquant) ?) then (Oui) 
+                :Annuler le déplacement;
+            else (Non)
+                :Eliminer le joueur;
+            endif
+        else (Non)
+        endif
+        
+    endwhile (Non)
+
+    :Fin>
+    note
+        Processus Fin
+    end note
+
+    stop
+}
+
+@enduml
