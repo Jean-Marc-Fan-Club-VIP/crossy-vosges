@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private TextMeshProUGUI scoreText;
+    public LayerMask stopPlayerLayer;
    
     private Animator animator;
     private bool isHooping;
@@ -68,12 +69,16 @@ public class Player : MonoBehaviour
 
     private void MoveCharacter(Vector3 difference)
     {
-        score = System.Math.Max(score,(int)transform.position.x + 1);
-        animator.SetTrigger("hop");
-        isHooping = true;
-        transform.position = transform.position + difference;
-        terrainGenerator.SpawnTerrain(false,transform.position);
-        scoreText.text = "Score : " + score;
+        Collider[] colliders = Physics.OverlapSphere(difference, 0.1f, stopPlayerLayer);
+        if (colliders.Length == 0)
+        {
+            score = System.Math.Max(score,(int)transform.position.x + 1);
+            animator.SetTrigger("hop");
+            isHooping = true;
+            transform.position += difference;
+            terrainGenerator.SpawnTerrain(false,transform.position);
+            scoreText.text = "Score : " + score;
+        }       
     }
 
     public void FinishHop()

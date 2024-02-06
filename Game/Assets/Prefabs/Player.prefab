@@ -133,6 +133,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 0}
   scoreText: {fileID: 0}
+  stopPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &4053803759074586789
 BoxCollider:
   m_ObjectHideFlags: 0
