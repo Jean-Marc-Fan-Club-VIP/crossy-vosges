@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void OptionsGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        
+        OptionsMenu.GoOptions = true;
     }
 }

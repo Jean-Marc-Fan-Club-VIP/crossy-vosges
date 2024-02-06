@@ -58,6 +58,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OptionsGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        pauseMenuUi.SetActive(false);
+        OptionsMenu.GoOptions = true;
     }
 }

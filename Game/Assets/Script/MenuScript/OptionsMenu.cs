@@ -9,21 +9,17 @@ public class OptionsMenu : MonoBehaviour
 {
     public GameObject optionsMenuUi;
 
+    public static bool GoOptions = false;
+
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         
     }
 
-    public void Back()
-    {
-        if (PauseMenu.GameIsPaused)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        }else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
-        }
-        
-    }
 }
 
