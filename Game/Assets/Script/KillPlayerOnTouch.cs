@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KillPlayerOnTouch : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class KillPlayerOnTouch : MonoBehaviour
         if (collision.collider.GetComponent<Player>() != null)
         {
             Destroy(collision.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
