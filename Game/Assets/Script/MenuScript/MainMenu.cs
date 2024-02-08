@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
 
     public void OptionsGame()
     {
-        
         OptionsMenu.GoOptions = true;
     }
 }
