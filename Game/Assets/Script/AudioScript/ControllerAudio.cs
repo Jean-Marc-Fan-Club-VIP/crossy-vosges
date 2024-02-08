@@ -7,11 +7,9 @@ public class ControllerAudio : MonoBehaviour
 {
     public AudioClip sound;
 
-    [Range(0f, 1f)]
-    public float volume;
+    private float volume;
 
-    [Range(0.1f, 2.5f)]
-    public float pitch;
+    private float pitch;
 
     private AudioSource source;
 
