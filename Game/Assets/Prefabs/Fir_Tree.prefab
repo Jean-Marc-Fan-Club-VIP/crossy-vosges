@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3384114}
   - component: {fileID: 2377290}
   - component: {fileID: -5006852555478919007}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Fir_Tree
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 5, z: 2.5}
-  m_Center: {x: -0.00003945827, y: 2.8566523, z: -0.00022572278}
+  m_Size: {x: 3.83, y: 6.13, z: 3.9}
+  m_Center: {x: 0, y: 3, z: 0}
