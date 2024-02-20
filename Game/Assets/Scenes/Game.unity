@@ -207,6 +207,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7476164337762615511, guid: a690171089d859f46be86b43a501b395, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 704621035}
+    - target: {fileID: 7476164337762615511, guid: a690171089d859f46be86b43a501b395, type: 3}
+      propertyPath: terrainGenerator
+      value: 
+      objectReference: {fileID: 51584797}
     - target: {fileID: 7476164337762615511, guid: 60ac6f6fca294ab47828ecaf7ec87a29, type: 3}
       propertyPath: scoreText
       value: 
