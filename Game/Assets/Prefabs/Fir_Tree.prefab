@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 471828}
   - component: {fileID: 3384114}
   - component: {fileID: 2377290}
-  - component: {fileID: 2629326515850503064}
   - component: {fileID: -5006852555478919007}
   m_Layer: 0
   m_Name: Fir_Tree
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -85,18 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2629326515850503064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e878e5c22e8c7fd4cbdfe07ba6ffa4f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &-5006852555478919007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 5, z: 2.5}
-  m_Center: {x: -0.00003945827, y: 2.8566523, z: -0.00022572278}
+  m_Size: {x: 2.0615804, y: 5.7840047, z: 1.8368441}
+  m_Center: {x: -0.025630146, y: 2.8270023, z: -0.070480205}
