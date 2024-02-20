@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -8,7 +10,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private TextMeshProUGUI scoreText;
-   
     private Animator animator;
     private bool isHooping;
     private int score;
@@ -17,15 +18,10 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator> ();
     }
-    private void FixedUpdate()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown("space") && !isHooping)
         {
             float zDifference = 0;
@@ -68,12 +64,18 @@ public class Player : MonoBehaviour
 
     private void MoveCharacter(Vector3 difference)
     {
-        score = System.Math.Max(score,(int)transform.position.x + 1);
-        animator.SetTrigger("hop");
-        isHooping = true;
-        transform.position = transform.position + difference;
-        terrainGenerator.SpawnTerrain(false,transform.position);
-        scoreText.text = "Score : " + score;
+        var newPosition = transform.position + difference;
+        Collider[] colliders = Physics.OverlapBox(newPosition, new Vector3(0.3f,0.3f,0.3f), Quaternion.identity, -1);
+        var newColliders = colliders.Where((collider => collider.CompareTag("Obstacle"))).ToArray();
+        if (newColliders.Length == 0)
+        {
+            score = System.Math.Max(score,(int)transform.position.x + 1);
+            animator.SetTrigger("hop");
+            isHooping = true;
+            transform.position += difference;
+            terrainGenerator.SpawnTerrain(false,transform.position);
+            scoreText.text = "Score : " + score;
+        }
     }
 
     public void FinishHop()
