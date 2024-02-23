@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    private float speed;
+    public float Speed
+    {
+        set => speed = value;
+    }
     public bool isLog;
 
     private void Update()
