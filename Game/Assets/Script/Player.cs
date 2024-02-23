@@ -13,15 +13,33 @@ public class Player : MonoBehaviour
     private Animator animator;
     private bool isHooping;
     private int score;
-    // Start is called before the first frame update
+    private Vector3 startPosition;
+    private Vector3 endPosition;
+    private float desiredDuration = 0.1f;
+    private float elapsedTime;
+
     void Start()
     {
+        startPosition = transform.position;
+        endPosition = transform.position;
         animator = GetComponent<Animator> ();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (startPosition != endPosition)
+        {
+            elapsedTime += Time.deltaTime;
+            float percentageComplete = elapsedTime / desiredDuration;
+            transform.position = Vector3.Lerp(startPosition, endPosition, percentageComplete);
+            if (percentageComplete >= 1.0f)
+            {
+                startPosition = endPosition;
+                elapsedTime = 0;
+            }
+        }
         if (Input.GetKeyDown("space") && !isHooping)
         {
             float zDifference = 0;
@@ -69,10 +87,11 @@ public class Player : MonoBehaviour
         var newColliders = colliders.Where((collider => collider.CompareTag("Obstacle"))).ToArray();
         if (newColliders.Length == 0)
         {
+            startPosition = transform.position;
+            endPosition = transform.position + difference;
             score = System.Math.Max(score,(int)transform.position.x + 1);
             animator.SetTrigger("hop");
             isHooping = true;
-            transform.position += difference;
             terrainGenerator.SpawnTerrain(false,transform.position);
             scoreText.text = "Score : " + score;
         }
