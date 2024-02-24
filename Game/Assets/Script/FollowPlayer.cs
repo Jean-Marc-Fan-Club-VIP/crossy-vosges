@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -12,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (player != null)
+        if (player)
         {
             transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, smoothness);
         }

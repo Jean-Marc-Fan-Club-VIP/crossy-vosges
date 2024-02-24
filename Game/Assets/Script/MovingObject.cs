@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingObject : MonoBehaviour
@@ -13,8 +11,8 @@ public class MovingObject : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        if(transform.position.z < -25 || transform.position.z > 25)
+        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        if(transform.position.z is < -25 or > 25)
         {
             Destroy(gameObject);
         }
