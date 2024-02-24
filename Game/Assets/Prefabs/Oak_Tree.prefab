@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3398346}
   - component: {fileID: 2340482}
   - component: {fileID: -6424469160647490844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Oak_Tree
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

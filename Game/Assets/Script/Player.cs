@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private int blockingLayer = 6;
+    private int layerAsLayerMask;
     private Animator animator;
     private bool isHooping;
     private int score;
@@ -14,9 +15,12 @@ public class Player : MonoBehaviour
     private Vector3 endPosition;
     private const float DesiredDuration = 0.1f;
     private float elapsedTime;
+    private const int MaxNeededCollider = 1;
+    private readonly Collider[] colliders = new Collider[MaxNeededCollider];
 
     private void Start()
     {
+        layerAsLayerMask = (1 << blockingLayer);
         var transformPosition = transform.position;
         startPosition = transformPosition;
         endPosition = transformPosition;
@@ -81,9 +85,8 @@ public class Player : MonoBehaviour
     private void MoveCharacter(Vector3 currentPosition, Vector3 difference)
     {
         var newPosition = currentPosition + difference;
-        var colliders = Physics.OverlapBox(newPosition, new Vector3(0.3f,0.3f,0.3f), Quaternion.identity, -1);
-        var newColliders = colliders.Where((c => c.CompareTag("Obstacle"))).ToArray();
-        if (newColliders.Length == 0)
+        var size = Physics.OverlapBoxNonAlloc(newPosition, new Vector3(0.3f,0.3f,0.3f), colliders, Quaternion.identity, layerAsLayerMask);
+        if (size == 0)
         {
             startPosition = currentPosition;
             endPosition = currentPosition + difference;
