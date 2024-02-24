@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private const float DesiredDuration = 0.1f;
     private float elapsedTime;
 
-    void Start()
+    private void Start()
     {
         var transformPosition = transform.position;
         startPosition = transformPosition;
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        var currentPosition = transform.position;
         if (startPosition != endPosition)
         {
             elapsedTime += Time.deltaTime;
@@ -42,24 +42,23 @@ public class Player : MonoBehaviour
         {
             float zDifference = 0;
 
-            var transformPosition = transform.position;
-            if(transformPosition.z % 1 == 0)
+            if(currentPosition.z % 1 == 0)
             {
-                zDifference = Mathf.Round(transformPosition.z) - transformPosition.z;
+                zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
             }
-            MoveCharacter(new Vector3(1,0,zDifference));
+            MoveCharacter(currentPosition,new Vector3(1,0,zDifference));
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(0, 0, 1)));
+            MoveCharacter(currentPosition,(new Vector3(0, 0, 1)));
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(0, 0, -1)));
+            MoveCharacter(currentPosition,(new Vector3(0, 0, -1)));
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(-1, 0, 0)));
+            MoveCharacter(currentPosition,(new Vector3(-1, 0, 0)));
         }
 
     }
@@ -79,19 +78,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void MoveCharacter(Vector3 difference)
+    private void MoveCharacter(Vector3 currentPosition, Vector3 difference)
     {
-        var newPosition = transform.position + difference;
+        var newPosition = currentPosition + difference;
         var colliders = Physics.OverlapBox(newPosition, new Vector3(0.3f,0.3f,0.3f), Quaternion.identity, -1);
         var newColliders = colliders.Where((c => c.CompareTag("Obstacle"))).ToArray();
         if (newColliders.Length == 0)
         {
-            startPosition = transform.position;
-            endPosition = transform.position + difference;
-            score = System.Math.Max(score,(int)transform.position.x + 1);
+            startPosition = currentPosition;
+            endPosition = currentPosition + difference;
+            score = System.Math.Max(score,(int)currentPosition.x + 1);
             animator.SetTrigger("hop");
             isHooping = true;
-            terrainGenerator.SpawnTerrain(false,transform.position);
+            terrainGenerator.SpawnTerrain(false,currentPosition);
             scoreText.text = "Score : " + score;
         }
     }
