@@ -5,6 +5,5 @@ using UnityEngine;
 public class TerrainData : ScriptableObject
 {
     public List<GameObject> possibleTerrain;
-    public GameObject firstTerrain;
     public int maxInSuccession;
 }
