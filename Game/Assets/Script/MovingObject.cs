@@ -3,16 +3,14 @@ using UnityEngine;
 public class MovingObject : MonoBehaviour
 {
     public bool isLog;
-    private float speed;
-
-    public float Speed
-    {
-        set => speed = value;
-    }
+    public float speed = 2;
+    public float leftBound;
+    public float rightBound;
 
     private void Update()
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        if (transform.position.z is < -25 or > 25) Destroy(gameObject);
+        var positionZ = transform.position.z;
+        if (positionZ < leftBound || positionZ > rightBound) Destroy(gameObject);
     }
 }

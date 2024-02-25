@@ -23,7 +23,11 @@ public class MovingObjectSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minSeparationtime, maxSeparationTime));
             var go = Instantiate(spawnObject, spawnPos.position, Quaternion.identity);
-            go.GetComponent<MovingObject>().Speed = rowSpeed;
+            var movingObject = go.GetComponent<MovingObject>();
+            var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
+            movingObject.speed = rowSpeed;
+            movingObject.leftBound = -(rowSize / 2);
+            movingObject.rightBound = rowSize / 2;
             if (!isRightSide && go) go.transform.Rotate(new Vector3(0, 180, 0));
         }
     }
