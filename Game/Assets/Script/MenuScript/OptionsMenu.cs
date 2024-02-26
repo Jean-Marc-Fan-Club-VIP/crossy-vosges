@@ -15,12 +15,12 @@ public class OptionsMenu : MonoBehaviour
 
     void Start()
     {
-        
+        slider.value = volumeSound;
     }
 
     void Update()
     {
-        
+        slider.value = volumeSound;
     }
 
     public void OnValueChanged()

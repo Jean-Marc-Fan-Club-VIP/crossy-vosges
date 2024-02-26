@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
     private Animator animator;
     private bool isHooping;
     private int score;
+    
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator> ();
+
     }
 
     // Update is called once per frame

@@ -7,26 +7,22 @@ public class ControllerAudio : MonoBehaviour
 {
     public AudioClip sound;
 
-    private float volume;
-
-    private float pitch;
+    //private float volume;
 
     private AudioSource source;
 
     void Awake()
     {
-        gameObject.AddComponent<AudioSource>();
-        source = GetComponent<AudioSource>();
+        /*source = GetComponent<AudioSource>();
 
-        volume = 0.5f;
-        pitch = 1f;
+        volume = OptionsMenu.volumeSound;
+        pitch = 1f;*/
     }
     // Start is called before the first frame update
     void Start()
     {
-        source.clip = sound;
-        source.volume = volume;
-        source.pitch = pitch;
+        source = GetComponent<AudioSource>();
+        source.volume = OptionsMenu.volumeSound;
         
     }
 
@@ -36,15 +32,9 @@ public class ControllerAudio : MonoBehaviour
         source.volume = OptionsMenu.volumeSound;
     }
 
-    public void PlayAndPause()
+    public void PlayButton()
     {
-        if(!source.isPlaying)
-        {
-            source.Play();
-        }
-        else
-        {
-            source.Pause();
-        }
+        source.PlayOneShot(sound);
+        Debug.Log("TESTTTTT");
     }
 }
