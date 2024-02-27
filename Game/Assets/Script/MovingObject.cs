@@ -11,6 +11,9 @@ public class MovingObject : MonoBehaviour
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         var positionZ = transform.position.z;
-        if (positionZ < leftBound || positionZ > rightBound) Destroy(gameObject);
+        if (positionZ < leftBound || positionZ > rightBound)
+        {
+            Destroy(gameObject);
+        }
     }
 }

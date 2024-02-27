@@ -28,7 +28,10 @@ public class MovingObjectSpawner : MonoBehaviour
             movingObject.speed = rowSpeed;
             movingObject.leftBound = -(rowSize / 2);
             movingObject.rightBound = rowSize / 2;
-            if (!isRightSide && go) go.transform.Rotate(new Vector3(0, 180, 0));
+            if (!isRightSide && go)
+            {
+                go.transform.Rotate(new Vector3(0, 180, 0));
+            }
         }
     }
 }

@@ -49,7 +49,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
         {
             float zDifference = 0;
-            if (currentPosition.z % 1 == 0) zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
+            if (currentPosition.z % 1 == 0)
+            {
+                zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
+            }
+
             MoveCharacter(currentPosition, new Vector3(1, 0, zDifference));
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
@@ -70,7 +74,10 @@ public class Player : MonoBehaviour
     {
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
-            if (collision.collider.GetComponent<MovingObject>().isLog) transform.parent = collision.collider.transform;
+            if (collision.collider.GetComponent<MovingObject>().isLog)
+            {
+                transform.parent = collision.collider.transform;
+            }
         }
         else
         {
@@ -83,7 +90,11 @@ public class Player : MonoBehaviour
         var newPosition = currentPosition + difference;
         var isColliding = Physics.OverlapBoxNonAlloc(newPosition, new Vector3(0.3f, 0.3f, 0.3f), colliders,
             Quaternion.identity, blockingLayerMask) != 0;
-        if (isColliding) return;
+        if (isColliding)
+        {
+            return;
+        }
+
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
         score = Math.Max(score, (int)currentPosition.x + 1);

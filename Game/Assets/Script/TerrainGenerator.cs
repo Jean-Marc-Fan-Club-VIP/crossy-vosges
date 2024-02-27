@@ -14,7 +14,11 @@ public class TerrainGenerator : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 0; i < maxTerrainCount; i++) SpawnTerrain(true, new Vector3(0, 0, 0));
+        for (var i = 0; i < maxTerrainCount; i++)
+        {
+            SpawnTerrain(true, new Vector3(0, 0, 0));
+        }
+
         maxTerrainCount = currentTerrains.Count;
     }
 
@@ -53,11 +57,13 @@ public class TerrainGenerator : MonoBehaviour
 
 
                 if (!isStart)
+                {
                     if (currentTerrains.Count > maxTerrainCount)
                     {
                         Destroy(currentTerrains[0]);
                         currentTerrains.RemoveAt(0);
                     }
+                }
 
                 currentTerrains.Add(terrain);
                 currentPosition.x++;
