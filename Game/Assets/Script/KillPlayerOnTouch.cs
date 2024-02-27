@@ -23,8 +23,12 @@ public class KillPlayerOnTouch : MonoBehaviour
     IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
-        audioSource.PlayOneShot(sound);
-        yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
+        if(sound != null)
+        {
+            audioSource.PlayOneShot(sound);
+            yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
+        }
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
