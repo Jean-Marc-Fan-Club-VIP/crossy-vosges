@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0144139dc5640594c920426e3b43b8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 6565492798252486526, guid: f9af64938f97cc24ebe997b0a2d40e32, type: 3}
+  spawnObject: {fileID: 3473249941414777459, guid: 17cc6ab4dc82f4149801bf314203f7c1, type: 3}
   spawnPos: {fileID: 5354458280593668458}
   minSeparationtime: 2
   maxSeparationTime: 4
