@@ -1,0 +1,14 @@
+{
+    "datas" :[
+        {
+        "Name": "Test",
+        "Level": 2,
+        "Score": 0
+        },
+        {
+            "Name": "Test2",
+            "Level": 2,
+            "Score": 0
+        }
+    ]
+}
