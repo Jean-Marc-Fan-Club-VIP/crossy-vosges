@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
     public void PlayGame()
     {
         Debug.Log("Game started");
