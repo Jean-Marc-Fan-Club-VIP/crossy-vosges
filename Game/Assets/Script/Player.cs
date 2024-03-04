@@ -1,38 +1,42 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using TMPro;
-
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private const float DesiredDuration = 0.1f;
+
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private int blockingLayer = 6;
+
+
+    private readonly Collider[]
+        colliders = new Collider[1]; // We only need one collider to make the collision detection work. Improves performances
+
     private Animator animator;
+    private int blockingLayerMask;
+    private float elapsedTime;
+    private Vector3 endPosition;
     private bool isHooping;
     private int score;
     private Vector3 startPosition;
-    private Vector3 endPosition;
-    private float desiredDuration = 0.1f;
-    private float elapsedTime;
 
-    void Start()
+    private void Start()
     {
-        startPosition = transform.position;
-        endPosition = transform.position;
-        animator = GetComponent<Animator> ();
+        blockingLayerMask = 1 << blockingLayer;
+        var transformPosition = transform.position;
+        startPosition = transformPosition;
+        endPosition = transformPosition;
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
         if (startPosition != endPosition)
         {
             elapsedTime += Time.deltaTime;
-            float percentageComplete = elapsedTime / desiredDuration;
+            var percentageComplete = elapsedTime / DesiredDuration;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageComplete);
             if (percentageComplete >= 1.0f)
             {
@@ -40,34 +44,35 @@ public class Player : MonoBehaviour
                 elapsedTime = 0;
             }
         }
-        if (Input.GetKeyDown("space") && !isHooping)
+
+        var currentPosition = transform.position;
+        if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
         {
             float zDifference = 0;
-            
-            if(transform.position.z % 1 == 0)
+            if (currentPosition.z % 1 == 0)
             {
-                zDifference = Mathf.Round(transform.position.z) - transform.position.z;
+                zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
             }
-            MoveCharacter(new Vector3(1,0,zDifference));
+
+            MoveCharacter(currentPosition, new Vector3(1, 0, zDifference));
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(0, 0, 1)));
+            MoveCharacter(currentPosition, Vector3.forward);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(0, 0, -1)));
+            MoveCharacter(currentPosition, Vector3.back);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping)
         {
-            MoveCharacter((new Vector3(-1, 0, 0)));
+            MoveCharacter(currentPosition, Vector3.left);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.GetComponent<MovingObject>() != null)
+        if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isLog)
             {
@@ -75,30 +80,32 @@ public class Player : MonoBehaviour
             }
         }
         else
-        { 
+        {
             transform.parent = null;
         }
     }
 
-    private void MoveCharacter(Vector3 difference)
+    private void MoveCharacter(Vector3 currentPosition, Vector3 difference)
     {
-        var newPosition = transform.position + difference;
-        Collider[] colliders = Physics.OverlapBox(newPosition, new Vector3(0.3f,0.3f,0.3f), Quaternion.identity, -1);
-        var newColliders = colliders.Where((collider => collider.CompareTag("Obstacle"))).ToArray();
-        if (newColliders.Length == 0)
+        var newPosition = currentPosition + difference;
+        var isColliding = Physics.OverlapBoxNonAlloc(newPosition, new Vector3(0.3f, 0.3f, 0.3f), colliders,
+            Quaternion.identity, blockingLayerMask) != 0;
+        if (isColliding)
         {
-            startPosition = transform.position;
-            endPosition = transform.position + difference;
-            score = System.Math.Max(score,(int)transform.position.x + 1);
-            animator.SetTrigger("hop");
-            isHooping = true;
-            terrainGenerator.SpawnTerrain(false,transform.position);
-            scoreText.text = "Score : " + score;
+            return;
         }
+
+        startPosition = currentPosition;
+        endPosition = currentPosition + difference;
+        score = Math.Max(score, (int)currentPosition.x + 1);
+        scoreText.text = $"Score : {score}";
+        animator.SetTrigger("hop");
+        isHooping = true;
+        terrainGenerator.SpawnTerrain(false, currentPosition);
     }
 
     public void FinishHop()
     {
-        isHooping = false; 
+        isHooping = false;
     }
 }
