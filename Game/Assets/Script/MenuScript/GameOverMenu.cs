@@ -15,12 +15,12 @@ public class GameOverMenu : MonoBehaviour
 
     public void ReplayGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
     {
         Debug.Log("QUIT");
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

@@ -47,13 +47,13 @@ public class PauseMenu : MonoBehaviour
 
     public void RePlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
         Debug.Log("QUIT");
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     public void OptionsGame()
