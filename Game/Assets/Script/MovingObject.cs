@@ -10,8 +10,8 @@ public class MovingObject : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        var positionZ = transform.position.z;
-        if (positionZ < leftBound || positionZ > rightBound)
+        var position = transform.position;
+        if (position.z < leftBound || position.z > rightBound || position.y < -5)
         {
             Destroy(gameObject);
         }
