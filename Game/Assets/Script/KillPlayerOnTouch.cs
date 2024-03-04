@@ -14,7 +14,7 @@ public class KillPlayerOnTouch : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.GetComponent<Player>() != null)
+        if (collision.collider.GetComponent<Player>())
         {
             StartCoroutine(DestroyPlayerAndLoadNextScene(collision.gameObject));
         }
@@ -23,7 +23,7 @@ public class KillPlayerOnTouch : MonoBehaviour
     IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
-        if(sound != null)
+        if(sound)
         {
             audioSource.PlayOneShot(sound);
             yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
