@@ -1,23 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingObject : MonoBehaviour
 {
-    private float speed;
-    public float Speed
-    {
-        set => speed = value;
-    }
     public bool isLog;
+    public float speed = 2;
+    public float leftBound;
+    public float rightBound;
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        if(transform.position.z < -25 || transform.position.z > 25)
+        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
+        var position = transform.position;
+        if (position.z < leftBound || position.z > rightBound || position.y < -5)
         {
             Destroy(gameObject);
         }
     }
-
 }
