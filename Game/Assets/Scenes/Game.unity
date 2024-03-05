@@ -2668,6 +2668,14 @@ PrefabInstance:
       propertyPath: terrainHolder
       value: 
       objectReference: {fileID: 1368047089}
+    - target: {fileID: 1774469359822833906, guid: 709c8873dad3961448e77b8f23d4ec6c, type: 3}
+      propertyPath: terrainDatas.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1774469359822833906, guid: 709c8873dad3961448e77b8f23d4ec6c, type: 3}
+      propertyPath: terrainDatas.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f0cdebc1bd8e0849984135fb5c11ebb, type: 2}
     - target: {fileID: 6019880938477140564, guid: 709c8873dad3961448e77b8f23d4ec6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
