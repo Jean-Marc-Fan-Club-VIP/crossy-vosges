@@ -25,7 +25,14 @@ public class MovingObjectSpawner : MonoBehaviour
             var go = Instantiate(spawnObject, spawnPos.position, Quaternion.identity);
             var movingObject = go.GetComponent<MovingObject>();
             var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
-            movingObject.speed = rowSpeed;
+            
+            var speedMultiplier = 1f;
+            if (movingObject.isLog)
+            {
+                speedMultiplier = 0.75f;
+            }
+
+            movingObject.speed = rowSpeed * speedMultiplier;
             movingObject.leftBound = -(rowSize / 2);
             movingObject.rightBound = rowSize / 2;
             if (!isRightSide && go)
