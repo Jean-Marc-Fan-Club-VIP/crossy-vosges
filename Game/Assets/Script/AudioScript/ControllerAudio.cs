@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -21,8 +21,21 @@ public class ControllerAudio : MonoBehaviour
         source.volume = OptionsMenu.volumeSound;
     }
 
+    
+
+
     public void PlaySound()
     {
+        if (sound && source)
+        {
+
+            StartCoroutine(WaitSoundToFinishPlaying());
+        }
+    }
+
+    public IEnumerator WaitSoundToFinishPlaying()
+    {
         source.PlayOneShot(sound);
+        yield return new WaitForSeconds(sound.length); 
     }
 }

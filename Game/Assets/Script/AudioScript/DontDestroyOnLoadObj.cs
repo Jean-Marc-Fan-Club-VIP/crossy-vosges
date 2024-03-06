@@ -6,7 +6,6 @@ public class DontDestroyOnLoadObj : MonoBehaviour
 {
     private void Awake()
     {
-        // Ensure that this GameObject persists through scene changes
         DontDestroyOnLoad(gameObject);
     }
 }
