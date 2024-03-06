@@ -20,7 +20,7 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
     }
 
-    IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
+   IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
         if(sound && audioSource)

@@ -28,12 +28,11 @@ public class ControllerAudio : MonoBehaviour
     {
         if (sound && source)
         {
-
-            StartCoroutine(WaitSoundToFinishPlaying());
+            StartCoroutine(WaitSoundToFinishPlaying(sound,source));
         }
     }
 
-    public IEnumerator WaitSoundToFinishPlaying()
+    public IEnumerator WaitSoundToFinishPlaying(AudioClip sound, AudioSource source)
     {
         source.PlayOneShot(sound);
         yield return new WaitForSeconds(sound.length); 
