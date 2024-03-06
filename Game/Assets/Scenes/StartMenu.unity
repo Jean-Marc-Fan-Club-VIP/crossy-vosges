@@ -5026,7 +5026,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1716592592}
         m_TargetAssemblyTypeName: ControllerAudio, Assembly-CSharp
-        m_MethodName: PlayButton
+        m_MethodName: PlaySound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
