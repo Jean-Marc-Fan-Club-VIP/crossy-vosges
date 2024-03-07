@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class KillPlayerOnTouch : MonoBehaviour
 {
-    private AudioSource audioSource;
     public AudioClip sound;
-    void Start()
+    private AudioSource audioSource;
+
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
@@ -20,7 +19,7 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
     }
 
-    IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
+    private IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
         if (sound)

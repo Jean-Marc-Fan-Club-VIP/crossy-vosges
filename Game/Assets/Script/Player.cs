@@ -76,6 +76,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.GetComponent<MovingObject>() != null)
@@ -113,10 +118,5 @@ public class Player : MonoBehaviour
     public void FinishHop()
     {
         isHooping = false;
-    }
-
-    public void OnDestroy()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
