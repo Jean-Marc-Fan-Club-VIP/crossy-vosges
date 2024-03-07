@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -46,6 +47,11 @@ public class Player : MonoBehaviour
         }
 
         var currentPosition = transform.position;
+        if(currentPosition.y <= -1)
+        {
+           Destroy(gameObject);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
         {
             float zDifference = 0;
@@ -107,5 +113,10 @@ public class Player : MonoBehaviour
     public void FinishHop()
     {
         isHooping = false;
+    }
+
+    public void OnDestroy()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

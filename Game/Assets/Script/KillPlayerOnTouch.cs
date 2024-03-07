@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,7 +28,5 @@ public class KillPlayerOnTouch : MonoBehaviour
             audioSource.PlayOneShot(sound);
             yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
         }
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
