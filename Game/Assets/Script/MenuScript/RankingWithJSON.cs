@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -7,7 +7,7 @@ using System.IO;
 public class RankingWithJSON : MonoBehaviour
 {
     [SerializeField] private TMP_Text textExample;
-    
+
     string chemin, jsonString;
 
     void Start()
@@ -18,24 +18,24 @@ public class RankingWithJSON : MonoBehaviour
         Debug.Log(jsonString);
         Debug.Log(player);
         textExample.text = player.Name + " ; " + player.Level + " ; " + player.Score;*/
-       /* // Charger le contenu du fichier JSON en tant que texte
-        chemin = Application.streamingAssetsPath + "/datasOldPlayers.json";
-        jsonString = File.ReadAllText(chemin);
+        /* // Charger le contenu du fichier JSON en tant que texte
+         chemin = Application.streamingAssetsPath + "/datasOldPlayers.json";
+         jsonString = File.ReadAllText(chemin);
 
-        // Utiliser JsonUtility pour désérialiser le JSON en un objet C#
-        OldPlayer[] oldPlayers = JsonHelper.FromJson<OldPlayer>(jsonString);
+         // Utiliser JsonUtility pour dÃ©sÃ©rialiser le JSON en un objet C#
+         OldPlayer[] oldPlayers = JsonHelper.FromJson<OldPlayer>(jsonString);
 
-        // Accéder aux données lues
-        foreach (OldPlayer p in oldPlayers)
-        {
-            Debug.Log($"Name: {p.Name}, Level: {p.Level}, Score: {p.Score}");
-        }*/
+         // AccÃ©der aux donnÃ©es lues
+         foreach (OldPlayer p in oldPlayers)
+         {
+             Debug.Log($"Name: {p.Name}, Level: {p.Level}, Score: {p.Score}");
+         }*/
     }
 
-    
+
     void Update()
     {
-        
+
     }
 }
 
@@ -44,5 +44,5 @@ public class OldPlayer
     public string Name;
     public int Level;
     public int Score;
-    public OldPlayer(string name, int level, int score) {  Name = name; Level = level; Score = score; }
+    public OldPlayer(string name, int level, int score) { Name = name; Level = level; Score = score; }
 }
