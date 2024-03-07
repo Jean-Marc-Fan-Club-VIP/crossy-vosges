@@ -47,9 +47,9 @@ public class Player : MonoBehaviour
         }
 
         var currentPosition = transform.position;
-        if(currentPosition.y <= -1)
+        if (currentPosition.y <= -1)
         {
-           Destroy(gameObject);
+            Destroy(gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
