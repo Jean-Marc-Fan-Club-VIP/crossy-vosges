@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Road
-  m_Shader: {fileID: -6465566751694194690, guid: 0ffaf4feab1be0a4f974497c4ed959d0, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c81693c7704fe654986d5e0b7397d59f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
