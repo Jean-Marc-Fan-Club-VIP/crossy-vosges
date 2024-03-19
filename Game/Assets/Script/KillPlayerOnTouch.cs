@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-<<<<<<< HEAD
 using System.Collections.Generic;
-=======
->>>>>>> origin/main
 using UnityEngine;
 
 public class KillPlayerOnTouch : MonoBehaviour
@@ -23,7 +20,6 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
    IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
