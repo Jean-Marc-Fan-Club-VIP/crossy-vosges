@@ -28,7 +28,9 @@ public class MovingObjectSpawner : MonoBehaviour
             
             var go = Instantiate(spawnObject, spawnPos.position, Quaternion.identity);
             var movingObject = go.GetComponent<MovingObject>();
-            var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
+            
+            // var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
+            var rowSize = 50;
             
             var speedMultiplier = 1f;
             if (movingObject.isLog)
