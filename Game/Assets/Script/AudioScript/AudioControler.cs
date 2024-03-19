@@ -11,6 +11,11 @@ public class AudioControler : MonoBehaviour
         backgroundMusic = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        backgroundMusic.volume = OptionsMenu.volumeSound;
+    }
+
     public void PauseBackgroundMusic()
     {
         if (backgroundMusic != null && backgroundMusic.isPlaying)

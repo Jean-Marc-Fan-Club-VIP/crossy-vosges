@@ -29,9 +29,9 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
         if (sound && audioSource)
         {
-            Debug.Log("Play sound");
+            audioSource.volume = OptionsMenu.volumeSound;
             audioSource.PlayOneShot(sound);
-            yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
+            yield return new WaitForSeconds(sound.length); 
         }
         Destroy(player);
     }
