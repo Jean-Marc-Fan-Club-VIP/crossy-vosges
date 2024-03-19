@@ -1,13 +1,16 @@
 ﻿using System.Collections;
+<<<<<<< HEAD
 using System.Collections.Generic;
+=======
+>>>>>>> origin/main
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class KillPlayerOnTouch : MonoBehaviour
 {
-    private AudioSource audioSource;
     public AudioClip sound;
-    void Start()
+    private AudioSource audioSource;
+
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
@@ -20,6 +23,7 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
    IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
         Destroy(player);
@@ -28,7 +32,5 @@ public class KillPlayerOnTouch : MonoBehaviour
             audioSource.PlayOneShot(sound);
             yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
         }
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

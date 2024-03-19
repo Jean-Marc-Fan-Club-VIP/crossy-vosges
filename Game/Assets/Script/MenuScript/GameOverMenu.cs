@@ -15,7 +15,6 @@ public class GameOverMenu : MonoBehaviour
 
         if (audioController != null)
         {
-            // Appeler la méthode PauseBackgroundMusic() de l'objet AudioControler
             audioController.PauseBackgroundMusic();
         }
         else
