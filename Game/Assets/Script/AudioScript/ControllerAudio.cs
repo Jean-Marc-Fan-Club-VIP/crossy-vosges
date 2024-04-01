@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -13,7 +13,7 @@ public class ControllerAudio : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         source.volume = OptionsMenu.volumeSound;
-        
+
     }
 
     void Update()
