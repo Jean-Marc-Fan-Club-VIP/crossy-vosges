@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MovingObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnObject;
+    [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private Transform spawnPos;
     [SerializeField] private int minSeparationtime;
     [SerializeField] private int maxSeparationTime;
@@ -22,10 +22,23 @@ public class MovingObjectSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minSeparationtime, maxSeparationTime));
+            
+            // Select random
+            var spawnObject = this.spawnObjects[Random.Range(0, this.spawnObjects.Length)];
+            
             var go = Instantiate(spawnObject, spawnPos.position, Quaternion.identity);
             var movingObject = go.GetComponent<MovingObject>();
-            var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
-            movingObject.speed = rowSpeed;
+            
+            // var rowSize = gameObject.GetComponent<MeshRenderer>().bounds.size.z;
+            var rowSize = 50;
+            
+            var speedMultiplier = 1f;
+            if (movingObject.isLog)
+            {
+                speedMultiplier = 0.75f;
+            }
+
+            movingObject.speed = rowSpeed * speedMultiplier;
             movingObject.leftBound = -(rowSize / 2);
             movingObject.rightBound = rowSize / 2;
             if (!isRightSide && go)
