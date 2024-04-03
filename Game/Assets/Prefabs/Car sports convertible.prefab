@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9df35aee50eff488a240e8522d1ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: c88a11b62e248eb48a032fd39585fefd, type: 3}
+  sound: {fileID: 8300000, guid: edf7739607966864bab93e5baf80e4e8, type: 3}
 --- !u!114 &8603501236849496266
 MonoBehaviour:
   m_ObjectHideFlags: 0
