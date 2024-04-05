@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class KillPlayerOnTouch : MonoBehaviour
@@ -19,13 +20,19 @@ public class KillPlayerOnTouch : MonoBehaviour
         }
     }
 
-    private IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
+   IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
-        Destroy(player);
-        if (sound)
+        Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
         {
-            audioSource.PlayOneShot(sound);
-            yield return new WaitForSeconds(sound.length); // Wait for the sound to finish playing
+            renderer.enabled = false;
         }
+        if (sound && audioSource)
+        {
+            audioSource.volume = OptionsMenu.volumeSound;
+            audioSource.PlayOneShot(sound);
+            yield return new WaitForSeconds(sound.length); 
+        }
+        Destroy(player);
     }
 }
