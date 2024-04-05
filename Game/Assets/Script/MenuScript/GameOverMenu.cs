@@ -9,28 +9,38 @@ public class GameOverMenu : MonoBehaviour
     public GameObject gameOverMenuUi;
     private AudioControler audioController;
 
-    private void Start()
-    {
-        audioController = FindObjectOfType<AudioControler>();
+    public static bool GoGameOverMenu = false; 
 
-        if (audioController != null)
+    public void Update()
+    {
+        if (GoGameOverMenu)
         {
-            audioController.PauseBackgroundMusic();
-        }
-        else
-        {
-            Debug.LogWarning("AudioControler non trouvé dans la scène.");
+            audioController = FindObjectOfType<AudioControler>();
+
+            if (audioController != null)
+            {
+                audioController.PauseBackgroundMusic();
+            }
+            else
+            {
+                Debug.LogWarning("AudioControler non trouvé dans la scène.");
+            }
+            gameOverMenuUi.SetActive(true);
+            GoGameOverMenu = true;
+            Time.timeScale = 0f;
         }
     }
 
     public void ReplayGame()
     {
         audioController.ResumeBackgroundMusic();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        GoGameOverMenu = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
+        GoGameOverMenu = false;
         audioController.ResumeBackgroundMusic();
         Debug.Log("Back Start Menu");
         SceneManager.LoadScene(1);
