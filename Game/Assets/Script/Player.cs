@@ -36,6 +36,14 @@ public class Player : MonoBehaviour
     {
         if (startPosition != endPosition)
         {
+            var isNotOnLog = Physics.OverlapBoxNonAlloc(transform.position, new Vector3(0.1f, 0.5f, 0.1f), colliders,
+                Quaternion.identity, blockingLayerMask) != 0;
+            if (isNotOnLog)
+            {
+                endPosition.x = (float)Math.Round(endPosition.x);
+                endPosition.z = (float)Math.Round(endPosition.z);
+            }
+
             elapsedTime += Time.deltaTime;
             var percentageComplete = elapsedTime / DesiredDuration;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageComplete);
