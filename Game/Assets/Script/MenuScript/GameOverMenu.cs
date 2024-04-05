@@ -11,7 +11,12 @@ public class GameOverMenu : MonoBehaviour
 
     public static bool GoGameOverMenu = false; 
 
-    public void Update()
+    private void Start()
+    {
+        GoGameOverMenu = false;
+    }
+
+    private void Update()
     {
         if (GoGameOverMenu)
         {
