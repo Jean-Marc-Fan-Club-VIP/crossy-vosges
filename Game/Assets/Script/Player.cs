@@ -36,9 +36,8 @@ public class Player : MonoBehaviour
     {
         if (startPosition != endPosition)
         {
-            var isNotOnLog = Physics.OverlapBoxNonAlloc(transform.position, new Vector3(0.1f, 0.5f, 0.1f), colliders,
-                Quaternion.identity, blockingLayerMask) != 0;
-            if (isNotOnLog)
+            var isOnLog = !IsColliding(transform.position, new Vector3(0.1f, 0.5f, 0.1f), blockingLayerMask);
+            if (!isOnLog)
             {
                 endPosition.x = (float)Math.Round(endPosition.x);
                 endPosition.z = (float)Math.Round(endPosition.z);
@@ -107,9 +106,8 @@ public class Player : MonoBehaviour
     private void MoveCharacter(Vector3 currentPosition, Vector3 difference)
     {
         var newPosition = currentPosition + difference;
-        var isColliding = Physics.OverlapBoxNonAlloc(newPosition, new Vector3(0.3f, 0.3f, 0.3f), colliders,
-            Quaternion.identity, blockingLayerMask) != 0;
-        if (isColliding)
+        var isMoveBlocked = IsColliding(newPosition, new Vector3(0.3f, 0.3f, 0.3f), blockingLayerMask);
+        if (isMoveBlocked)
         {
             return;
         }
@@ -121,6 +119,13 @@ public class Player : MonoBehaviour
         animator.SetTrigger("hop");
         isHooping = true;
         terrainGenerator.SpawnTerrain(false, currentPosition);
+    }
+
+    private bool IsColliding(Vector3 position, Vector3 halfExtents, int mask)
+    {
+        var isColliding = Physics.OverlapBoxNonAlloc(position, halfExtents, colliders,
+            Quaternion.identity, mask) != 0;
+        return isColliding;
     }
 
     public void FinishHop()
