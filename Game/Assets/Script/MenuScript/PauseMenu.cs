@@ -10,9 +10,19 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUi;
 
+
+    private AudioControler audioController;
+
     void Start()
     {
+        audioController = FindObjectOfType<AudioControler>();
         Resume();
+        
+
+        if (audioController == null)
+        {
+            Debug.LogWarning("AudioControler non trouvé dans la scène.");
+        }
     }
 
     void Update()
@@ -33,6 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        audioController.ResumeBackgroundMusic();
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -40,6 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        audioController.PauseBackgroundMusic();
         pauseMenuUi.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -52,8 +64,9 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("QUIT");
-        SceneManager.LoadScene(0);
+        audioController.ResumeBackgroundMusic();
+        Debug.Log("Back Start Menu");
+        SceneManager.LoadScene(1);
     }
 
     public void OptionsGame()

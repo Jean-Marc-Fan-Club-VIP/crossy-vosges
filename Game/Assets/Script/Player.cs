@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private int blockingLayer = 6;
 
-
     private readonly Collider[]
         colliders = new Collider[1]; // We only need one collider to make the collision detection work. Improves performances
 
@@ -85,7 +84,7 @@ public class Player : MonoBehaviour
 
     public void OnDestroy()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameOverMenu.GoGameOverMenu = true;
     }
 
     private void OnCollisionEnter(Collision collision)

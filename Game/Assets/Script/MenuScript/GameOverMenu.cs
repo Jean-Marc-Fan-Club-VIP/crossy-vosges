@@ -7,20 +7,47 @@ using UnityEngine.UI;
 public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenuUi;
+    private AudioControler audioController;
 
-    void Update()
+    public static bool GoGameOverMenu = false; 
+
+    private void Start()
     {
+        GoGameOverMenu = false;
+    }
 
+    private void Update()
+    {
+        if (GoGameOverMenu)
+        {
+            audioController = FindObjectOfType<AudioControler>();
+
+            if (audioController != null)
+            {
+                audioController.PauseBackgroundMusic();
+            }
+            else
+            {
+                Debug.LogWarning("AudioControler non trouvé dans la scène.");
+            }
+            gameOverMenuUi.SetActive(true);
+            GoGameOverMenu = true;
+            Time.timeScale = 0f;
+        }
     }
 
     public void ReplayGame()
     {
-        SceneManager.LoadScene(1);
+        audioController.ResumeBackgroundMusic();
+        GoGameOverMenu = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
-        Debug.Log("QUIT");
-        SceneManager.LoadScene(0);
+        GoGameOverMenu = false;
+        audioController.ResumeBackgroundMusic();
+        Debug.Log("Back Start Menu");
+        SceneManager.LoadScene(1);
     }
 }
