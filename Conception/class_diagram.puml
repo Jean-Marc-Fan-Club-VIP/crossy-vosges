@@ -1,7 +1,10 @@
 @startuml
 
 package CrossyRoad {
-    interface MonoBehaviour{}
+    interface MonoBehaviour{
+        - Start()
+        - Update()
+    }
     
     abstract class UI{}
     interface Scene{}
@@ -12,12 +15,23 @@ package CrossyRoad {
         class Player extends GameObject{
             + int score
             + bool isHooping
+            OnCollisionEnter(Collision collision)
+            MoveCharacter(Vector3 currentPosition, Vector3 difference)
+            IsColliding(Vector3 position, Vector3 halfExtents, int mask)
+            FinishHop()
         }
         class MovingObject extends GameObject{}
-        class MovingObjectSpawner{}
-        class KillPlayerOnTouch{}
+        class MovingObjectSpawner{
+            SpawnVehicle()
+        }
+        class KillPlayerOnTouch{
+            OnCollisionEnter(Collision collision)
+            DestroyPlayerAndLoadNextScene(GameObject player)
+        }
         class TerrainData extends GameObject{}
-        class TerrainGenerator{}
+        class TerrainGenerator{
+            SpawnTerrain(bool isStart, Vector3 playerPos)
+        }
         
         Player -- "1" TerrainGenerator
         
@@ -44,10 +58,26 @@ package CrossyRoad {
     GameScript.Player -- "2" Vector3
     
     package MenusScript {
-        class GameOverMenu{}
-        class PauseMenu{}
-        class MainMenu{}
-        class OptionsMenu{}
+        
+        class MainMenu{
+            PlayGame()
+            QuitGame()
+            OptionsGame()
+        }
+        class OptionsMenu{
+            OnValueChanged()
+        }
+        class GameOverMenu{
+            ReplayGame()
+            QuitGame()
+        }
+        class PauseMenu{
+            Resume()
+            Pause()
+            ReplayGame()
+            QuitGame()
+            OptionsGame()
+        }
         class LevelSelector{}
         class RankMenu{}
     }
@@ -61,7 +91,10 @@ package CrossyRoad {
     SceneScript --|> MonoBehaviour
     
     package AudioScript {
-        class AudioControler{}
+        class AudioControler{
+            PauseBackgroundMusic()
+            ResumeBackgroundMusic()
+        }
         class ManageAudioListeners{}
     }
     AudioScript --|> MonoBehaviour
