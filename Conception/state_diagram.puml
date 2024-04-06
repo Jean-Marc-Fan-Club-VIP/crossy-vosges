@@ -6,7 +6,6 @@ title Diagramme d'état du joueur dans une partie
 Immobile --> Saut : <color:blue>**Demande de saut**</color>
 Immobile --> Déplacement : <color:blue>**Demande de déplacement **(droite/gauche/arrière)</color>
 
-Saut --> Immobile : <color:blue>**Atterrissage**</color>
 Saut --> Chute : <color:blue>**En l'air**</color>
 
 Chute --> Immobile : <color:blue>**Atterrissage**</color>
