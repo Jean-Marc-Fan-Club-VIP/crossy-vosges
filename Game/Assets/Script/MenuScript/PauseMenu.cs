@@ -43,7 +43,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        audioController.ResumeBackgroundMusic();
+        if (audioController != null)
+        {
+            audioController.ResumeBackgroundMusic();
+        }
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -51,7 +54,10 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        audioController.PauseBackgroundMusic();
+        if (audioController != null)
+        {
+            audioController.PauseBackgroundMusic();
+        }
         pauseMenuUi.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -64,7 +70,10 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        audioController.ResumeBackgroundMusic();
+        if (audioController != null)
+        {
+            audioController.ResumeBackgroundMusic();
+        }
         Debug.Log("Back Start Menu");
         SceneManager.LoadScene(1);
     }
