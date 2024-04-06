@@ -1,0 +1,81 @@
+@startuml
+
+package CrossyRoad {
+    interface MonoBehaviour{}
+    
+    abstract class UI{}
+    interface Scene{}
+    
+    package GameScript {
+        interface GameObject{}
+        class FollowPlayer{}
+        class Player extends GameObject{
+            + int score
+            + bool isHooping
+        }
+        class MovingObject extends GameObject{}
+        class MovingObjectSpawner{}
+        class KillPlayerOnTouch{}
+        class TerrainData extends GameObject{}
+        class TerrainGenerator{}
+        
+        Player -- "1" TerrainGenerator
+        
+        TerrainData -- "*" Grass
+        TerrainData -- "*" Road
+        TerrainData -- "*" Water
+        TerrainData -- "*" Tracks
+        
+        MovingObject -- "*" Vehicul
+        MovingObject -- "*" Train
+        MovingObject -- "*" Log
+        
+        interface Animation{}
+        interface Vector3{}
+        class Hop extends Animation{}
+        class Idle extends Animation{}
+        
+        interface ScriptableObject{}
+        TerrainData --|> ScriptableObject
+    }
+    GameScript --|> MonoBehaviour
+    
+    GameScript.Player -- "*" Animation   
+    GameScript.Player -- "2" Vector3
+    
+    package MenusScript {
+        class GameOverMenu{}
+        class PauseMenu{}
+        class MainMenu{}
+        class OptionsMenu{}
+        class LevelSelector{}
+        class RankMenu{}
+    }
+    MenusScript --|> MonoBehaviour
+    MenusScript -- "*" UI
+    
+    package SceneScript {
+        class DontDestroyOnLoadObj{}
+        class AutoLoadScene{}
+    }
+    SceneScript --|> MonoBehaviour
+    
+    package AudioScript {
+        class AudioControler{}
+        class ManageAudioListeners{}
+    }
+    AudioScript --|> MonoBehaviour
+    
+    class Tree extends DecorObject{}
+    class Flower extends DecorObject{}
+    class Hay extends DecorObject{}
+    class Rock extends DecorObject{}
+    
+    class Game extends Scene{}
+    
+    Game -- "*" ScriptableObject
+    Game -- "*" MonoBehaviour
+    Game -- "*" DecorObject
+}
+
+@enduml
