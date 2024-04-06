@@ -1,0 +1,114 @@
+@startuml
+
+package CrossyRoad {
+    interface MonoBehaviour{
+        - Start()
+        - Update()
+    }
+    
+    abstract class UI{}
+    interface Scene{}
+    
+    package GameScript {
+        interface GameObject{}
+        class FollowPlayer{}
+        class Player extends GameObject{
+            + int score
+            + bool isHooping
+            OnCollisionEnter(Collision collision)
+            MoveCharacter(Vector3 currentPosition, Vector3 difference)
+            IsColliding(Vector3 position, Vector3 halfExtents, int mask)
+            FinishHop()
+        }
+        class MovingObject extends GameObject{}
+        class MovingObjectSpawner{
+            SpawnVehicle()
+        }
+        class KillPlayerOnTouch{
+            OnCollisionEnter(Collision collision)
+            DestroyPlayerAndLoadNextScene(GameObject player)
+        }
+        class TerrainData extends GameObject{}
+        class TerrainGenerator{
+            SpawnTerrain(bool isStart, Vector3 playerPos)
+        }
+        
+        Player -- "1" TerrainGenerator
+        
+        TerrainData -- "*" Grass
+        TerrainData -- "*" Road
+        TerrainData -- "*" Water
+        TerrainData -- "*" Tracks
+        
+        MovingObject -- "*" Vehicul
+        MovingObject -- "*" Train
+        MovingObject -- "*" Log
+        
+        interface Animation{}
+        interface Vector3{}
+        class Hop extends Animation{}
+        class Idle extends Animation{}
+        
+        interface ScriptableObject{}
+        TerrainData --|> ScriptableObject
+    }
+    GameScript --|> MonoBehaviour
+    
+    GameScript.Player -- "*" Animation   
+    GameScript.Player -- "2" Vector3
+    
+    package MenusScript {
+        
+        class MainMenu{
+            PlayGame()
+            QuitGame()
+            OptionsGame()
+        }
+        class OptionsMenu{
+            OnValueChanged()
+        }
+        class GameOverMenu{
+            ReplayGame()
+            QuitGame()
+        }
+        class PauseMenu{
+            Resume()
+            Pause()
+            ReplayGame()
+            QuitGame()
+            OptionsGame()
+        }
+        class LevelSelector{}
+        class RankMenu{}
+    }
+    MenusScript --|> MonoBehaviour
+    MenusScript -- "*" UI
+    
+    package SceneScript {
+        class DontDestroyOnLoadObj{}
+        class AutoLoadScene{}
+    }
+    SceneScript --|> MonoBehaviour
+    
+    package AudioScript {
+        class AudioControler{
+            PauseBackgroundMusic()
+            ResumeBackgroundMusic()
+        }
+        class ManageAudioListeners{}
+    }
+    AudioScript --|> MonoBehaviour
+    
+    class Tree extends DecorObject{}
+    class Flower extends DecorObject{}
+    class Hay extends DecorObject{}
+    class Rock extends DecorObject{}
+    
+    class Game extends Scene{}
+    
+    Game -- "*" ScriptableObject
+    Game -- "*" MonoBehaviour
+    Game -- "*" DecorObject
+}
+
+@enduml
