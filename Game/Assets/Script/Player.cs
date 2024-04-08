@@ -20,10 +20,12 @@ public class Player : MonoBehaviour
     private Vector3 endPosition;
     private bool isHooping;
     private int score;
+    private bool canMove;
     private Vector3 startPosition;
 
     private void Start()
     {
+        canMove = true;
         blockingLayerMask = 1 << blockingLayer;
         var transformPosition = transform.position;
         startPosition = transformPosition;
@@ -58,25 +60,19 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
+        if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && !isHooping && canMove)
         {
-            float zDifference = 0;
-            if (currentPosition.z % 1 == 0)
-            {
-                zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
-            }
-
-            MoveCharacter(currentPosition, new Vector3(1, 0, zDifference));
+            MoveCharacter(currentPosition, Vector3.right);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.forward);
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.back);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.left);
         }
@@ -89,6 +85,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Collision with the terrain
+        canMove = true;
+
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isLog)
@@ -113,10 +112,12 @@ public class Player : MonoBehaviour
 
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
+        endPosition.y += 0.05f; // Make sure to leave the ground
         score = Math.Max(score, (int)currentPosition.x + 1);
         scoreText.text = $"Score : {score}";
         animator.SetTrigger("hop");
         isHooping = true;
+        canMove = false;
         terrainGenerator.SpawnTerrain(false, currentPosition);
     }
 
