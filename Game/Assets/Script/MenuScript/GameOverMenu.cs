@@ -26,10 +26,6 @@ public class GameOverMenu : MonoBehaviour
             {
                 audioController.PauseBackgroundMusic();
             }
-            else
-            {
-                Debug.LogWarning("AudioControler non trouvé dans la scène.");
-            }
             gameOverMenuUi.SetActive(true);
             GoGameOverMenu = true;
             Time.timeScale = 0f;
@@ -38,7 +34,10 @@ public class GameOverMenu : MonoBehaviour
 
     public void ReplayGame()
     {
-        audioController.ResumeBackgroundMusic();
+        if (audioController != null)
+        {
+            audioController.ResumeBackgroundMusic();
+        }
         GoGameOverMenu = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -46,7 +45,10 @@ public class GameOverMenu : MonoBehaviour
     public void QuitGame()
     {
         GoGameOverMenu = false;
-        audioController.ResumeBackgroundMusic();
+        if (audioController != null)
+        {
+            audioController.ResumeBackgroundMusic();
+        }
         Debug.Log("Back Start Menu");
         SceneManager.LoadScene(1);
     }
