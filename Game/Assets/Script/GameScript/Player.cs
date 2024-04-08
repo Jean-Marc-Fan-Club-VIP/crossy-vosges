@@ -117,6 +117,11 @@ public class Player : MonoBehaviour
 
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
+        // Block the terrain before start
+        if(endPosition.x < 0)
+        {
+            endPosition.x = 0;
+        }
         endPosition.y += 0.05f; // Make sure to leave the ground
         
         startRotation = transform.rotation;
