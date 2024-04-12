@@ -7,6 +7,13 @@ public static class EventManager
     public static event UnityAction TimerStarted;
     public static event UnityAction TimerStopped;
 
+    public static event UnityAction GameOver;
+
+    public static void OnGameOver()
+    {
+        GameOver?.Invoke();
+    }
+
     public static void OnScoreUpdated(int newScore)
     {
         ScoreUpdated?.Invoke(newScore);

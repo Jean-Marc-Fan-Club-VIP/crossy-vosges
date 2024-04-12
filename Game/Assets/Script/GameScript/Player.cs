@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
 
     public void OnDestroy()
     {
-        GameOverMenu.GoGameOverMenu = true;
+        EventManager.OnGameOver();
         EventManager.OnTimerStopped();
     }
 
