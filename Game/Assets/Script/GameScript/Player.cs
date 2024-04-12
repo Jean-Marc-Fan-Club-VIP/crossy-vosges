@@ -1,14 +1,11 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     private const float DesiredDuration = 0.1f;
 
     [SerializeField] private TerrainGenerator terrainGenerator;
-    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private int blockingLayer = 6;
 
     private readonly Collider[]
@@ -114,7 +111,7 @@ public class Player : MonoBehaviour
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
         score = Math.Max(score, (int)currentPosition.x + 1);
-        scoreText.text = $"Score : {score}";
+        EventManager.OnScoreUpdated(score);
         animator.SetTrigger("hop");
         isHooping = true;
         terrainGenerator.SpawnTerrain(false, currentPosition);
