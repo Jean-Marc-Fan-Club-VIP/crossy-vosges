@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenuUi;
+    [SerializeField] public TMP_Text _score;
+    [SerializeField] private TMP_Text _timer;
     private AudioControler audioController;
 
     private void Awake()
@@ -19,11 +23,25 @@ public class GameOverMenu : MonoBehaviour
     private void OnEnable()
     {
         EventManager.GameOver += EventManagerOnGameOver;
+        EventManager.TimerUpdated += EventManagerOnTimerUpdated;
+        EventManager.ScoreUpdated += EventManagerOnScoreUpdated;
     }
 
     private void OnDisable()
     {
         EventManager.GameOver -= EventManagerOnGameOver;
+        EventManager.TimerUpdated -= EventManagerOnTimerUpdated;
+    }
+
+    private void EventManagerOnScoreUpdated(int value)
+    {
+        _score.text = $"{value}";
+    }
+
+    private void EventManagerOnTimerUpdated(float value)
+    {
+        var timeSpan = TimeSpan.FromSeconds(value);
+        _timer.text = timeSpan.ToString(@"mm\:ss");
     }
 
     private void EventManagerOnGameOver()

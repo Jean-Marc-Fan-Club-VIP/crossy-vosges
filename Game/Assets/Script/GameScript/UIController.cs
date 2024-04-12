@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI score;
 
     [SerializeField] private TMP_Text _timer;
+    [SerializeField] private GameObject _stats;
 
     private void Start()
     {
@@ -17,12 +18,19 @@ public class UIController : MonoBehaviour
     {
         EventManager.ScoreUpdated += EventManagerOnScoreUpdated;
         EventManager.TimerUpdated += EventManagerOnTimerUpdated;
+        EventManager.GameOver += EventManagerOnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.ScoreUpdated -= EventManagerOnScoreUpdated;
         EventManager.TimerUpdated -= EventManagerOnTimerUpdated;
+        EventManager.GameOver -= EventManagerOnGameOver;
+    }
+
+    private void EventManagerOnGameOver()
+    {
+        _stats.SetActive(false);
     }
 
     private void EventManagerOnTimerUpdated(float value)
