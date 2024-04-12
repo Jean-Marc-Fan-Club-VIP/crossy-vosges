@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
     public void OnDestroy()
     {
         GameOverMenu.GoGameOverMenu = true;
+        EventManager.OnTimerStopped();
     }
 
     private void OnCollisionEnter(Collision collision)
