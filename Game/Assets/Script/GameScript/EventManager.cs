@@ -12,6 +12,7 @@ public static class EventManager
     public static void OnGameOver()
     {
         GameOver?.Invoke();
+        TimerStopped?.Invoke();
     }
 
     public static void OnScoreUpdated(int newScore)
