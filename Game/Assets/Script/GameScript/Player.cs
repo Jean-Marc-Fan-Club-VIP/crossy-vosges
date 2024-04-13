@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const float DesiredDuration = 0.1f;
+    private const float LerpDesiredDurationMove = 0.1f;
 
     [SerializeField] private TerrainGenerator terrainGenerator;
     [SerializeField] private int blockingLayer = 6;
@@ -13,39 +13,46 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private int blockingLayerMask;
-    private float elapsedTime;
-    private Vector3 endPosition;
     private bool isHooping;
     private int score;
+    private bool canMove;
+    private float lerpElapsedTime;
     private Vector3 startPosition;
+    private Vector3 endPosition;
+    private Quaternion startRotation;
+    private Quaternion endRotation;
 
     private void Start()
     {
+        canMove = true;
         blockingLayerMask = 1 << blockingLayer;
-        var transformPosition = transform.position;
-        startPosition = transformPosition;
-        endPosition = transformPosition;
+        startPosition = transform.position;
+        endPosition = transform.position;
+        startRotation = transform.rotation;
+        endRotation = transform.rotation;
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (startPosition != endPosition)
+        if (startPosition != endPosition || startRotation != endRotation)
         {
-            var isOnLog = !IsColliding(transform.position, new Vector3(0.1f, 0.5f, 0.1f), blockingLayerMask);
+            var isOnLog = !IsColliding(transform.position, new Vector3(0.25f, 1f, 0.5f), blockingLayerMask);
             if (!isOnLog)
             {
                 endPosition.x = (float)Math.Round(endPosition.x);
                 endPosition.z = (float)Math.Round(endPosition.z);
             }
 
-            elapsedTime += Time.deltaTime;
-            var percentageComplete = elapsedTime / DesiredDuration;
+            lerpElapsedTime += Time.deltaTime;
+            float percentageComplete = lerpElapsedTime / LerpDesiredDurationMove;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageComplete);
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, percentageComplete);
             if (percentageComplete >= 1.0f)
             {
                 startPosition = endPosition;
-                elapsedTime = 0;
+                startRotation = endRotation;
+                lerpElapsedTime = 0;
             }
         }
 
@@ -55,25 +62,19 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isHooping)
+        if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && !isHooping && canMove)
         {
-            float zDifference = 0;
-            if (currentPosition.z % 1 == 0)
-            {
-                zDifference = Mathf.Round(currentPosition.z) - currentPosition.z;
-            }
-
-            MoveCharacter(currentPosition, new Vector3(1, 0, zDifference));
+            MoveCharacter(currentPosition, Vector3.right);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.forward);
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.back);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.left);
         }
@@ -86,6 +87,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Collision with the terrain
+        canMove = true;
+
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isLog)
@@ -110,10 +114,36 @@ public class Player : MonoBehaviour
 
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
+        // Block the terrain before start
+        if(endPosition.x < 0)
+        {
+            endPosition.x = 0;
+        }
+        endPosition.y += 0.05f; // Make sure to leave the ground
+        
+        startRotation = transform.rotation;
+        if(difference == Vector3.right)
+        {
+            endRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if(difference == Vector3.left)
+        {
+            endRotation = Quaternion.Euler(0, 179.999f, 0);
+        }
+        else if(difference == Vector3.forward)
+        {
+            endRotation = Quaternion.Euler(0, 270.001f, 0);
+        }
+        else if(difference == Vector3.back)
+        {
+            endRotation = Quaternion.Euler(0, 90, 0);
+        }
+
         score = Math.Max(score, (int)currentPosition.x + 1);
         EventManager.OnScoreUpdated(score);
         animator.SetTrigger("hop");
         isHooping = true;
+        canMove = false;
         terrainGenerator.SpawnTerrain(false, currentPosition);
     }
 

@@ -35,7 +35,7 @@ public class MovingObjectSpawner : MonoBehaviour
             var speedMultiplier = 1f;
             if (movingObject.isLog)
             {
-                speedMultiplier = 0.75f;
+                speedMultiplier = 0.5f;
             }
 
             movingObject.speed = rowSpeed * speedMultiplier;
