@@ -91,8 +91,8 @@ MonoBehaviour:
   spawnObjects:
   - {fileID: 7519714709200599741, guid: 07c5a37332e0460419c418460e59b960, type: 3}
   spawnPos: {fileID: 2485679304006008643}
-  minSeparationtime: 3
-  maxSeparationTime: 5
+  minSeparationtime: 8
+  maxSeparationTime: 16
   isRightSide: 0
 --- !u!1 &8425215363270349333
 GameObject:

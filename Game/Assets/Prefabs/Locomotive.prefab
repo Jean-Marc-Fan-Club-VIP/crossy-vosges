@@ -9773,6 +9773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLog: 0
+  isLocomotive: 1
   speed: 2
   leftBound: 0
   rightBound: 0
