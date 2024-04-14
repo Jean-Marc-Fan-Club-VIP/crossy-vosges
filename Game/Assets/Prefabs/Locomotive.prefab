@@ -57,7 +57,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.75, y: 1, z: 4}
-  m_Center: {x: 0, y: -0.1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!54 &9064406828498251905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9df35aee50eff488a240e8522d1ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: c88a11b62e248eb48a032fd39585fefd, type: 3}
+  sound: {fileID: 8300000, guid: edf7739607966864bab93e5baf80e4e8, type: 3}
 --- !u!114 &4829684492827468058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,11 +220,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6d3930b00a1b34646bf5111a0e3e8619, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d3930b00a1b34646bf5111a0e3e8619, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d3930b00a1b34646bf5111a0e3e8619, type: 3}
       propertyPath: m_LocalPosition.z
