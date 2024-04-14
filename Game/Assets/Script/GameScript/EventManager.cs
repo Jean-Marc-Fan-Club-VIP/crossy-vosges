@@ -15,22 +15,22 @@ public static class EventManager
         TimerStopped?.Invoke();
     }
 
-    public static void OnScoreUpdated(int newScore)
+    public static void UpdateScore(int newScore)
     {
         ScoreUpdated?.Invoke(newScore);
     }
 
-    public static void OnTimerUpdated(float time)
+    public static void UpdateTime(float time)
     {
         TimerUpdated?.Invoke(time);
     }
 
-    public static void OnTimerStarted()
+    public static void StartTimer()
     {
         TimerStarted?.Invoke();
     }
 
-    public static void OnTimerStopped()
+    public static void StopTimer()
     {
         TimerStopped?.Invoke();
     }

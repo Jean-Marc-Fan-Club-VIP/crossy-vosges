@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        EventManager.OnTimerStarted();
+        EventManager.StartTimer();
     }
 
     private void OnEnable()

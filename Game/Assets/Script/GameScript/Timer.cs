@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
         }
 
         time += Time.deltaTime;
-        EventManager.OnTimerUpdated(time);
+        EventManager.UpdateTime(time);
     }
 
     private void OnEnable()

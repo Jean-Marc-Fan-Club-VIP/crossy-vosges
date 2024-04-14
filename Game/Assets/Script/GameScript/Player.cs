@@ -13,14 +13,14 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private int blockingLayerMask;
-    private bool isHooping;
-    private int score;
     private bool canMove;
-    private float lerpElapsedTime;
-    private Vector3 startPosition;
     private Vector3 endPosition;
-    private Quaternion startRotation;
     private Quaternion endRotation;
+    private bool isHooping;
+    private float lerpElapsedTime;
+    private int score;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
 
     private void Start()
     {
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
             }
 
             lerpElapsedTime += Time.deltaTime;
-            float percentageComplete = lerpElapsedTime / LerpDesiredDurationMove;
+            var percentageComplete = lerpElapsedTime / LerpDesiredDurationMove;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageComplete);
             transform.rotation = Quaternion.Lerp(startRotation, endRotation, percentageComplete);
             if (percentageComplete >= 1.0f)
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.Space)) && !isHooping && canMove)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !isHooping && canMove)
         {
             MoveCharacter(currentPosition, Vector3.right);
         }
@@ -115,32 +115,33 @@ public class Player : MonoBehaviour
         startPosition = currentPosition;
         endPosition = currentPosition + difference;
         // Block the terrain before start
-        if(endPosition.x < 0)
+        if (endPosition.x < 0)
         {
             endPosition.x = 0;
         }
+
         endPosition.y += 0.05f; // Make sure to leave the ground
-        
+
         startRotation = transform.rotation;
-        if(difference == Vector3.right)
+        if (difference == Vector3.right)
         {
             endRotation = Quaternion.Euler(0, 0, 0);
         }
-        else if(difference == Vector3.left)
+        else if (difference == Vector3.left)
         {
             endRotation = Quaternion.Euler(0, 179.999f, 0);
         }
-        else if(difference == Vector3.forward)
+        else if (difference == Vector3.forward)
         {
             endRotation = Quaternion.Euler(0, 270.001f, 0);
         }
-        else if(difference == Vector3.back)
+        else if (difference == Vector3.back)
         {
             endRotation = Quaternion.Euler(0, 90, 0);
         }
 
         score = Math.Max(score, (int)currentPosition.x + 1);
-        EventManager.OnScoreUpdated(score);
+        EventManager.UpdateScore(score);
         animator.SetTrigger("hop");
         isHooping = true;
         canMove = false;
