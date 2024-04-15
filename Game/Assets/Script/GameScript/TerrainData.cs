@@ -5,5 +5,6 @@ using UnityEngine;
 public class TerrainData : ScriptableObject
 {
     public List<GameObject> possibleTerrain;
+    public bool isWater;
     public int maxInSuccession;
 }

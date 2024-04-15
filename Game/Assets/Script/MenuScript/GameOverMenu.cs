@@ -1,35 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameOverMenu : MonoBehaviour
 {
     public GameObject gameOverMenuUi;
+    [SerializeField] public TMP_Text _score;
+    [SerializeField] private TMP_Text _timer;
     private AudioControler audioController;
 
-    public static bool GoGameOverMenu = false; 
+    private void Awake()
+    {
+        audioController = FindObjectOfType<AudioControler>();
+    }
 
     private void Start()
     {
-        GoGameOverMenu = false;
+        gameOverMenuUi.SetActive(false);
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (GoGameOverMenu)
-        {
-            audioController = FindObjectOfType<AudioControler>();
+        EventManager.GameOver += EventManagerOnGameOver;
+        EventManager.TimerUpdated += EventManagerOnTimerUpdated;
+        EventManager.ScoreUpdated += EventManagerOnScoreUpdated;
+    }
 
-            if (audioController != null)
-            {
-                audioController.PauseBackgroundMusic();
-            }
-            gameOverMenuUi.SetActive(true);
-            GoGameOverMenu = true;
-            Time.timeScale = 0f;
+    private void OnDisable()
+    {
+        EventManager.GameOver -= EventManagerOnGameOver;
+        EventManager.TimerUpdated -= EventManagerOnTimerUpdated;
+    }
+
+    private void EventManagerOnScoreUpdated(int value)
+    {
+        _score.text = $"{value}";
+    }
+
+    private void EventManagerOnTimerUpdated(float value)
+    {
+        var timeSpan = TimeSpan.FromSeconds(value);
+        _timer.text = timeSpan.ToString(@"mm\:ss");
+    }
+
+    private void EventManagerOnGameOver()
+    {
+        if (audioController)
+        {
+            audioController.PauseBackgroundMusic();
         }
+
+        gameOverMenuUi.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ReplayGame()
@@ -38,17 +61,17 @@ public class GameOverMenu : MonoBehaviour
         {
             audioController.ResumeBackgroundMusic();
         }
-        GoGameOverMenu = false;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()
     {
-        GoGameOverMenu = false;
         if (audioController != null)
         {
             audioController.ResumeBackgroundMusic();
         }
+
         Debug.Log("Back Start Menu");
         SceneManager.LoadScene(1);
     }

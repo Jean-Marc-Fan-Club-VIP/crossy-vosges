@@ -29,12 +29,12 @@ public class TerrainGenerator : MonoBehaviour
             if (currentPosition.x - playerPos.x < minDistanceFromPlayer || isStart)
             {
                 var whichTerrain = 0;
+                var terrainVariation = Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count);
 
-                var terrain =
-                    Instantiate(
-                        terrainDatas[whichTerrain]
-                            .possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)],
-                        currentPosition, Quaternion.identity, terrainHolder);
+                var terrain = Instantiate(
+                    terrainDatas[whichTerrain].possibleTerrain[terrainVariation],
+                    currentPosition, Quaternion.identity, terrainHolder
+                );
 
                 currentTerrains.Add(terrain);
                 currentPosition.x++;
@@ -49,11 +49,23 @@ public class TerrainGenerator : MonoBehaviour
             var terrainInSuccession = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
             for (var i = 0; i < terrainInSuccession; i++)
             {
-                var terrain =
-                    Instantiate(
-                        terrainDatas[whichTerrain]
-                            .possibleTerrain[Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count)],
-                        currentPosition, Quaternion.identity, terrainHolder);
+                var terrainVariation = Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count);
+                if (terrainDatas[whichTerrain].isWater)
+                {
+                    if (currentPosition.x % 2 == 0)
+                    {
+                        terrainVariation = 0;
+                    }
+                    else if (currentPosition.x % 2 == 1)
+                    {
+                        terrainVariation = 1;
+                    }
+                }
+
+                var terrain = Instantiate(
+                    terrainDatas[whichTerrain].possibleTerrain[terrainVariation],
+                    currentPosition, Quaternion.identity, terrainHolder
+                );
 
 
                 if (!isStart)

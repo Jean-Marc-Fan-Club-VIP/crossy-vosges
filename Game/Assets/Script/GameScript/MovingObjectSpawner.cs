@@ -14,6 +14,25 @@ public class MovingObjectSpawner : MonoBehaviour
     private void Start()
     {
         rowSpeed = Random.Range(2.0f, 6.0f);
+
+        // Specific rules for locomotive
+        if (spawnObjects.Length > 0)
+        {
+            bool containsLocomotive = false;
+            foreach (var spawnObject in spawnObjects)
+            {
+                if (spawnObject.GetComponent<MovingObject>().isLocomotive)
+                {
+                    containsLocomotive = true;
+                    break;
+                }
+            }
+            if(containsLocomotive)
+            {
+                rowSpeed = 10;
+            }
+        }
+
         StartCoroutine(SpawnVehicle());
     }
 
@@ -35,7 +54,7 @@ public class MovingObjectSpawner : MonoBehaviour
             var speedMultiplier = 1f;
             if (movingObject.isLog)
             {
-                speedMultiplier = 0.75f;
+                speedMultiplier = 0.5f;
             }
 
             movingObject.speed = rowSpeed * speedMultiplier;
