@@ -22,10 +22,9 @@ public class OptionsMenu : MonoBehaviour
         slider.value = volumeSound;
     }
 
-    public void OnPlayerNameChanged(string value)
+    public void OnPlayerNameChanged()
     {
-        Debug.Log(value.Length);
-        GameStats.CurrentPlayerName = value;
+        GameStats.CurrentPlayerName = playerNameInput.text;
     }
 
     public void OnValueChanged()
