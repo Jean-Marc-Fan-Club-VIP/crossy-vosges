@@ -12,12 +12,10 @@ public class NightModeManager : MonoBehaviour
         int currentLevel = LevelSelector.LevelGame();
         if (currentLevel == 1)
         {
-            Debug.Log("LEVEL 1");
             DesactivateNightMode();
         }
         else if (currentLevel == 2)
         {
-            Debug.Log("LEVEL 2");
             ActivateNightMode();
         }
     }
