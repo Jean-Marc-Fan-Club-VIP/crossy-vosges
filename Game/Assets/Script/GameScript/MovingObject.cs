@@ -3,6 +3,7 @@
 public class MovingObject : MonoBehaviour
 {
     public bool isLog;
+    public bool isLocomotive;
     public float speed = 2;
     public float leftBound;
     public float rightBound;
@@ -18,7 +19,7 @@ public class MovingObject : MonoBehaviour
     private void Update()
     {
         int speedMultiplier = 1;
-        if (!isObjectVisible())
+        if (!isObjectVisible() && !isLocomotive)
         {
             speedMultiplier = 10;
         }
