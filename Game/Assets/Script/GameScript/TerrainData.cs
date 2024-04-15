@@ -6,5 +6,6 @@ public class TerrainData : ScriptableObject
 {
     public List<GameObject> possibleTerrain;
     public bool isWater;
+    public bool isRail;
     public int maxInSuccession;
 }

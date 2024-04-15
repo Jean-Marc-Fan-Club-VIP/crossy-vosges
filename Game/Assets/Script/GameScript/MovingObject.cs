@@ -17,7 +17,13 @@ public class MovingObject : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
+        if (LevelSelector.LevelGame() > 1 && !isLocomotive)
+        {
+            speed *= 1.003f;
+        }
+        
+        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         int speedMultiplier = 1;
         if (!isObjectVisible() && !isLocomotive)
         {
