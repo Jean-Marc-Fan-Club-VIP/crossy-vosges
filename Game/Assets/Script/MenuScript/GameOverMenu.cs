@@ -1,23 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameOverMenu : MonoBehaviour
 {
+    private const string StatsPath = "stats.json";
     public GameObject gameOverMenuUi;
-    [SerializeField] public TMP_Text _score;
-    [SerializeField] private TMP_Text _timer;
+
+    [FormerlySerializedAs("_score")] [SerializeField]
+    public TMP_Text scoreText;
+
+    [FormerlySerializedAs("_timer")] [SerializeField]
+    private TMP_Text timerText;
+
     private AudioControler audioController;
+    private IDataService dataService;
+    private GameStats stats;
 
     private void Awake()
     {
         audioController = FindObjectOfType<AudioControler>();
+        dataService = new JsonDataService();
     }
 
     private void Start()
     {
         gameOverMenuUi.SetActive(false);
+        stats = new GameStats();
     }
 
     private void OnEnable()
@@ -35,13 +48,14 @@ public class GameOverMenu : MonoBehaviour
 
     private void EventManagerOnScoreUpdated(int value)
     {
-        _score.text = $"{value}";
+        stats.Score = value;
+        scoreText.text = $"{stats.Score}";
     }
 
     private void EventManagerOnTimerUpdated(float value)
     {
-        var timeSpan = TimeSpan.FromSeconds(value);
-        _timer.text = timeSpan.ToString(@"mm\:ss");
+        stats.Time = TimeSpan.FromSeconds(value);
+        timerText.text = stats.Time.ToString(@"mm\:ss");
     }
 
     private void EventManagerOnGameOver()
@@ -53,6 +67,24 @@ public class GameOverMenu : MonoBehaviour
 
         gameOverMenuUi.SetActive(true);
         Time.timeScale = 0f;
+        SaveStats();
+    }
+
+    private void SaveStats()
+    {
+        IEnumerable<GameStats> previousStats;
+        try
+        {
+            previousStats = dataService.LoadEntity<IEnumerable<GameStats>>(StatsPath);
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"{e}. Creating a new stat file");
+            previousStats = new List<GameStats>();
+        }
+
+        previousStats = previousStats.Append(stats);
+        dataService.SaveEntity(StatsPath, previousStats);
     }
 
     public void ReplayGame()
