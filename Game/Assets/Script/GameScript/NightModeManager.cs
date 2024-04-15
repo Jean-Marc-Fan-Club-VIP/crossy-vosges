@@ -28,7 +28,12 @@ public class NightModeManager : MonoBehaviour
         RenderSettings.fog = true;
         foreach (Light light in lights)
         {
-            light.intensity *= 0.6f;
+            if (light.color != Color.blue)
+            {
+                Color newColor;
+                ColorUtility.TryParseHtmlString("#BF6AFC", out newColor);
+                light.color = newColor;
+            }
         }
         isNightMode = true;
     }
@@ -39,9 +44,11 @@ public class NightModeManager : MonoBehaviour
         RenderSettings.fog = false;
         foreach (Light light in lights)
         {
-            if (light.intensity < 1.25)
+            if (light.color == Color.blue)
             {
-                light.intensity /= 0.6f;
+                Color newColor;
+                ColorUtility.TryParseHtmlString("#FFDE83", out newColor); 
+                light.color = newColor;
             }
         }
         isNightMode = false;
