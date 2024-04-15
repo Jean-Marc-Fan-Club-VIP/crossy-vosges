@@ -18,12 +18,7 @@ public class MovingObject : MonoBehaviour
 
     private void Update()
     {   
-        int currentLevel = LevelSelector.LevelGame();
-        if (currentLevel == 1)
-        {
-            
-        }
-        else if (currentLevel == 2)
+        if (LevelSelector.LevelGame() > 1 && !isLocomotive)
         {
             speed *= 1.003f;
         }
