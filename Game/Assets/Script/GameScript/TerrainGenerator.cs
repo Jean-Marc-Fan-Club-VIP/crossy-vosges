@@ -64,14 +64,7 @@ public class TerrainGenerator : MonoBehaviour
                 var terrainVariation = Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count);
                 if (terrainDatas[whichTerrain].isWater)
                 {
-                    if (currentPosition.x % 2 == 0)
-                    {
-                        terrainVariation = 0;
-                    }
-                    else if (currentPosition.x % 2 == 1)
-                    {
-                        terrainVariation = 1;
-                    }
+                    terrainVariation = ((int)currentPosition.x) % 3;
                 }
 
                 var terrain = Instantiate(
