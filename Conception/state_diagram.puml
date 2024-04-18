@@ -1,0 +1,23 @@
+@startuml
+title Diagramme d'état du joueur dans une partie
+
+[*] --> Immobile : <color:red>Ce point de départ représente l'état du joueur après le lancement de la partie de jeu.</color>
+
+Immobile --> Saut : <color:blue>**Demande de saut**</color>
+Immobile --> Déplacement : <color:blue>**Demande de déplacement **(droite/gauche/arrière)</color>
+
+Saut --> Chute : <color:blue>**En l'air**</color>
+
+Chute --> Immobile : <color:blue>**Atterrissage**</color>
+Chute --> Noyade : <color:blue>**Contact avec l'eau**</color>
+
+Noyade --> Mort : <color:blue>**Destruction du Joueur**</color>
+
+Déplacement --> Immobile : <color:blue>**Arrêt si rencontre avec un objet du décor**</color>
+Déplacement --> Collision : <color:blue>**Contact avec un véhicule ou un train**</color>
+
+Collision --> Mort : <color:blue>** Destruction du Joueur **</color>
+
+Mort --> [*]
+
+@enduml

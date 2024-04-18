@@ -17,7 +17,8 @@ public class MovingObject : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
+        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
         int speedMultiplier = 1;
         if (!isObjectVisible() && !isLocomotive)
         {

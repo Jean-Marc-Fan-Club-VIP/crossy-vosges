@@ -15,4 +15,6 @@ MonoBehaviour:
   possibleTerrain:
   - {fileID: 8238775192845663920, guid: 5765753353f20de4aa47e19e4ffb34fc, type: 3}
   - {fileID: 8238775192845663920, guid: 302ee10567012644eadd213933dcb1ed, type: 3}
+  isWater: 0
+  isRail: 1
   maxInSuccession: 1

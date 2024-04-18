@@ -13,7 +13,12 @@ public class MovingObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        rowSpeed = Random.Range(2.0f, 6.0f);
+        rowSpeed = Random.Range(1.5f, 3.0f);
+
+        if (LevelSelector.LevelGame() > 1)
+        {
+            rowSpeed *= 1.25f;
+        }
 
         // Specific rules for locomotive
         if (spawnObjects.Length > 0)

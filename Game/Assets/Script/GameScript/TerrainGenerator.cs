@@ -45,21 +45,26 @@ public class TerrainGenerator : MonoBehaviour
 
         if (currentPosition.x - playerPos.x < minDistanceFromPlayer || isStart)
         {
-            var whichTerrain = Random.Range(0, terrainDatas.Count);
+            var whichTerrain = 0;
+            if (LevelSelector.LevelGame() < 2)
+            {
+                do
+                {
+                    whichTerrain = Random.Range(0, terrainDatas.Count);
+                } while (terrainDatas[whichTerrain].isRail);
+            }
+            else
+            {
+                whichTerrain = Random.Range(0, terrainDatas.Count);
+            }
+
             var terrainInSuccession = Random.Range(1, terrainDatas[whichTerrain].maxInSuccession);
             for (var i = 0; i < terrainInSuccession; i++)
             {
                 var terrainVariation = Random.Range(0, terrainDatas[whichTerrain].possibleTerrain.Count);
                 if (terrainDatas[whichTerrain].isWater)
                 {
-                    if (currentPosition.x % 2 == 0)
-                    {
-                        terrainVariation = 0;
-                    }
-                    else if (currentPosition.x % 2 == 1)
-                    {
-                        terrainVariation = 1;
-                    }
+                    terrainVariation = ((int)currentPosition.x) % 3;
                 }
 
                 var terrain = Instantiate(
