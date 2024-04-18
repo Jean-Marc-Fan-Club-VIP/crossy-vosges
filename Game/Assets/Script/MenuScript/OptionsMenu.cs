@@ -1,35 +1,31 @@
-﻿using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class OptionsMenu : MonoBehaviour
 {
+    public GameObject optionsMenuUi;
+    public Slider slider;
     public static float volumeSound = 0.5f;
 
     public static bool GoOptions = false;
-    public GameObject optionsMenuUi;
-    public Slider slider;
-    public TMP_InputField playerNameInput;
 
-    private void Start()
-    {
-        slider.value = volumeSound;
-        playerNameInput.text = GameStats.CurrentPlayerName;
-    }
-
-    private void Update()
+    void Start()
     {
         slider.value = volumeSound;
     }
 
-    public void OnPlayerNameChanged(string value)
+    void Update()
     {
-        Debug.Log(value.Length);
-        GameStats.CurrentPlayerName = value;
+        slider.value = volumeSound;
     }
 
     public void OnValueChanged()
     {
         volumeSound = slider.value;
     }
+
 }

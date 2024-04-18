@@ -77,9 +77,9 @@ public class GameOverMenu : MonoBehaviour
         {
             previousStats = dataService.LoadEntity<IEnumerable<GameStats>>(StatsPath);
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Debug.Log("Creating a new stat file");
+            Debug.Log($"{e}. Creating a new stat file");
             previousStats = new List<GameStats>();
         }
 
