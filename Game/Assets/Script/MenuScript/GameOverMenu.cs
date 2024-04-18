@@ -83,7 +83,6 @@ public class GameOverMenu : MonoBehaviour
             previousStats = new List<GameStats>();
         }
 
-        stats.PlayerName = GameStats.CurrentPlayerName;
         previousStats = previousStats.Append(stats);
         dataService.SaveEntity(StatsPath, previousStats);
     }
