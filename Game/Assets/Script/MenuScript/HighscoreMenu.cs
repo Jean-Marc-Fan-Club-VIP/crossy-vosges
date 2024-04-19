@@ -23,13 +23,13 @@ public class HighscoreMenu : MonoBehaviour
     {
         var gameStats = dataService.LoadEntity<IEnumerable<GameStats>>(StatsPath);
         var highscores = (from stat in gameStats orderby stat.Score descending select stat).Take(TableSize).ToArray();
-        for (ushort i = 0; i < TableSize; i++)
+        for (ushort i = 0; i < highscores.Length; i++)
         {
             var row = Instantiate(rowTemplate, table);
             row.gameObject.SetActive(true);
             row.Find("Rank").GetComponent<TMP_Text>().SetText((i + 1).ToString());
             row.Find("Score").GetComponent<TMP_Text>().SetText(highscores[i].Score.ToString());
-            row.Find("Name").GetComponent<TMP_Text>().SetText("Player");
+            row.Find("Name").GetComponent<TMP_Text>().SetText(highscores[i].Name);
         }
     }
 }
