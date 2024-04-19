@@ -19,7 +19,7 @@ public class GameOverMenu : MonoBehaviour
 
     private AudioControler audioController;
     private IDataService dataService;
-    private GameStats stats;
+    private RunStats stats;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GameOverMenu : MonoBehaviour
     private void Start()
     {
         gameOverMenuUi.SetActive(false);
-        stats = new GameStats();
+        stats = new RunStats();
     }
 
     private void OnEnable()
@@ -72,15 +72,15 @@ public class GameOverMenu : MonoBehaviour
 
     private void SaveStats()
     {
-        IEnumerable<GameStats> previousStats;
+        IEnumerable<RunStats> previousStats;
         try
         {
-            previousStats = dataService.LoadEntity<IEnumerable<GameStats>>(StatsPath);
+            previousStats = dataService.LoadEntity<IEnumerable<RunStats>>(StatsPath);
         }
         catch (Exception e)
         {
             Debug.Log($"{e}. Creating a new stat file");
-            previousStats = new List<GameStats>();
+            previousStats = new List<RunStats>();
         }
 
         stats.Name = OptionsMenu.PlayerName;

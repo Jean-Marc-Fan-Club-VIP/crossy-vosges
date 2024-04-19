@@ -21,7 +21,7 @@ public class HighscoreMenu : MonoBehaviour
 
     private void Start()
     {
-        var gameStats = dataService.LoadEntity<IEnumerable<GameStats>>(StatsPath);
+        var gameStats = dataService.LoadEntity<IEnumerable<RunStats>>(StatsPath);
         var highscores = (from stat in gameStats orderby stat.Score descending select stat).Take(TableSize).ToArray();
         for (ushort i = 0; i < highscores.Length; i++)
         {
