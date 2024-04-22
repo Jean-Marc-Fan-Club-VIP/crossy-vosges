@@ -31,6 +31,7 @@ public class GameOverMenu : MonoBehaviour
     {
         gameOverMenuUi.SetActive(false);
         stats = new RunStats();
+        stats.Level = LevelSelector.LevelGame();
     }
 
     private void OnEnable()
