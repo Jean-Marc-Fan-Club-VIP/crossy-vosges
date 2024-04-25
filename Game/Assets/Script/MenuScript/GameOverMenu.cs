@@ -17,6 +17,8 @@ public class GameOverMenu : MonoBehaviour
     [FormerlySerializedAs("_timer")] [SerializeField]
     private TMP_Text timerText;
 
+    [SerializeField] private TMP_Text rankText;
+
     private AudioControler audioController;
     private IDataService dataService;
     private RunStats stats;
@@ -73,10 +75,10 @@ public class GameOverMenu : MonoBehaviour
 
     private void SaveStats()
     {
-        IEnumerable<RunStats> previousStats;
+        List<RunStats> previousStats;
         try
         {
-            previousStats = dataService.LoadEntity<IEnumerable<RunStats>>(StatsPath);
+            previousStats = dataService.LoadEntity<List<RunStats>>(StatsPath);
         }
         catch (Exception e)
         {
@@ -85,7 +87,11 @@ public class GameOverMenu : MonoBehaviour
         }
 
         stats.Name = OptionsMenu.PlayerName;
-        previousStats = previousStats.Append(stats);
+        previousStats.Add(stats);
+        var rank = previousStats.Where(rs => rs.Level == LevelSelector.LevelGame()).OrderByDescending(rs => rs.Score)
+            .ToList()
+            .FindIndex(rs => rs.Score <= stats.Score) + 1;
+        rankText.SetText($"Your rank: #{rank}");
         dataService.SaveEntity(StatsPath, previousStats);
     }
 
