@@ -99,6 +99,12 @@ public class Player : MonoBehaviour
         // Collision with the terrain
         canMove = true;
 
+        if(collision.gameObject.layer == blockingLayer){
+            // Recenter player when leaving a log
+            startPosition = transform.position;
+            endPosition = new Vector3((float)Math.Round(transform.position.x), transform.position.y, (float)Math.Round(transform.position.z));
+        }
+
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
             if (collision.collider.GetComponent<MovingObject>().isLog)
