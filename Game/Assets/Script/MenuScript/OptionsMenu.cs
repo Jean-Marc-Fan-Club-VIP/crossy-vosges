@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 
 public class OptionsMenu : MonoBehaviour
 {
-    public GameObject optionsMenuUi;
-    public Slider slider;
+    public static string PlayerName = "Player";
     public static float volumeSound = 0.5f;
 
     public static bool GoOptions = false;
+    public Slider slider;
+    private TMP_InputField nameInput;
 
-    void Start()
+    private void Awake()
     {
-        slider.value = volumeSound;
+        nameInput = transform.Find("PlayerNameInput").GetComponent<TMP_InputField>();
     }
 
-    void Update()
+    private void Start()
+    {
+        slider.value = volumeSound;
+        nameInput.text = PlayerName;
+    }
+
+    private void Update()
     {
         slider.value = volumeSound;
     }
@@ -28,4 +32,8 @@ public class OptionsMenu : MonoBehaviour
         volumeSound = slider.value;
     }
 
+    public void OnPlayerNameChanged()
+    {
+        PlayerName = nameInput.text;
+    }
 }
