@@ -10,12 +10,16 @@ public class LilypadSpawner : MonoBehaviour
     public int maxSeparationTime;
     private List<int> positionsAlreadyTaken = new List<int>();
     int numberOfLilypads ; 
-    float waterWidth = 50;
 
     void Start()
     {
         positionsAlreadyTaken.Add(0);
         numberOfLilypads = Random.Range(2, 4);
+        Vector3 randomPosition = new Vector3(spawnPos.position.x, 0.5f, 0);
+        Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
+        var go = Instantiate(lilypad, randomPosition, randomRotation);
+        var movingObject = go.GetComponent<MovingObject>();
+
         SpawnLilypad();
     }
 
@@ -27,13 +31,13 @@ public class LilypadSpawner : MonoBehaviour
             {
                 do
                 {
-                    randomZ = (int)Random.Range(-(waterWidth/2)+15, (waterWidth / 2) - 15); 
+                    randomZ = (int)Random.Range(-7, 7); 
                 } while (isTaken(randomZ)); 
 
                 positionsAlreadyTaken.Add(randomZ);
                 Vector3 randomPosition = new Vector3(spawnPos.position.x, 0.5f, randomZ);
- 
-                var go = Instantiate(lilypad, randomPosition, Quaternion.identity);
+                Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
+                var go = Instantiate(lilypad, randomPosition, randomRotation);
                 var movingObject = go.GetComponent<MovingObject>();
                 
             }
