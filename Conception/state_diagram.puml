@@ -18,6 +18,6 @@ Déplacement --> Collision : <color:blue>**Contact avec un véhicule ou un train
 
 Collision --> Mort : <color:blue>** Destruction du Joueur **</color>
 
-Mort --> [*]
+Mort --> [*] 
 
 @enduml

@@ -86,7 +86,7 @@ package CrossyRoad {
     
     package SceneScript {
         class DontDestroyOnLoadObj{}
-        class AutoLoadScene{}
+        class AutoLoadScene{} 
     }
     SceneScript --|> MonoBehaviour
     
