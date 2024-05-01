@@ -3,8 +3,8 @@ title Diagramme d'état du joueur dans une partie
 
 [*] --> Immobile : <color:red>Ce point de départ représente l'état du joueur après le lancement de la partie de jeu.</color>
 
-Immobile --> Saut : <color:blue>**Demande de saut**</color>
-Immobile --> Déplacement : <color:blue>**Demande de déplacement **(droite/gauche/arrière)</color>
+Immobile --> Déplacement : <color:blue>**Demande de déplacement **(avant/arrière/droite/gauche)</color>
+Déplacement --> Saut : <color:blue>**Le deplacement est un Saut**</color>
 
 Saut --> Chute : <color:blue>**En l'air**</color>
 
@@ -18,6 +18,6 @@ Déplacement --> Collision : <color:blue>**Contact avec un véhicule ou un train
 
 Collision --> Mort : <color:blue>** Destruction du Joueur **</color>
 
-Mort --> [*]
+Mort --> [*] 
 
 @enduml

@@ -40,7 +40,7 @@ package CrossyRoad {
         TerrainData -- "*" Water
         TerrainData -- "*" Tracks
         
-        MovingObject -- "*" Vehicul
+        MovingObject -- "*" Vehicle
         MovingObject -- "*" Train
         MovingObject -- "*" Log
         
@@ -86,7 +86,7 @@ package CrossyRoad {
     
     package SceneScript {
         class DontDestroyOnLoadObj{}
-        class AutoLoadScene{}
+        class AutoLoadScene{} 
     }
     SceneScript --|> MonoBehaviour
     
