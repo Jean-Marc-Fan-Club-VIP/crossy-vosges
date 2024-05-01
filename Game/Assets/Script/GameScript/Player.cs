@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
         score = Math.Max(score, (int)currentPosition.x + 1);
         //sound every 50 points
-        StartCoroutine(ControlScorePlayer()); 
+        StartCoroutine(ControlScoreSound()); 
 
         EventManager.UpdateScore(score);
         animator.SetTrigger("hop");
@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
         isHooping = false;
     }
 
-    IEnumerator ControlScorePlayer()
+    IEnumerator ControlScoreSound()
     {
         if ((score%50 == 0) && (score > 0))
         {
