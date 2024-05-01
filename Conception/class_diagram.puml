@@ -40,7 +40,7 @@ package CrossyRoad {
         TerrainData -- "*" Water
         TerrainData -- "*" Tracks
         
-        MovingObject -- "*" Vehicul
+        MovingObject -- "*" Vehicle
         MovingObject -- "*" Train
         MovingObject -- "*" Log
         

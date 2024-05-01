@@ -4,20 +4,20 @@ left to right direction
 package Démarrage {
     actor "Joueur" as player
     usecase "Menu options" as options
-    usecase "Changer nom joueur" as name
     usecase "Activer/Désactiver le son" as sound
+    usecase "Changer nom joueur" as name
     usecase "Classement par difficulté" as leaderboard
     usecase "Choix difficulté" as difficulty
     usecase "Quitter" as leaveGame
     usecase "Jouer" as jouer
 }
-player --> name
 player --> jouer
 player --> difficulty
 player --> leaveGame
 player --> leaderboard
 player --> options
 options ..> sound: <<include>>
+options ..> name: <<include>>
 
 newpage 
 left to right direction
@@ -31,6 +31,7 @@ package Jeu {
     usecase "Continuer" as continue
     usecase "Déplacer le personnage" as play
     usecase "Activer/Désactiver le son" as sound
+    usecase "Changer nom joueur" as name
 }
 
 player --> play
@@ -40,6 +41,7 @@ pause ..> continue: <<extends>>
 pause ..> restart: <<extends>>
 pause ..> leave: <<extends>>
 options ..> sound: <<include>>
+options ..> name: <<include>>
 
 note left of pause
     Met le jeu en pause
