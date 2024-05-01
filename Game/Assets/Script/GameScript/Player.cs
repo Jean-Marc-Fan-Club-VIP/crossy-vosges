@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -23,6 +25,11 @@ public class Player : MonoBehaviour
     private Quaternion startRotation;
     private float timerAntiMoveLock;
 
+    private bool soundScoreIsPlayed;
+    public AudioClip sound;
+    private AudioSource audioSource;
+
+
     private void Start()
     {
         canMove = true;
@@ -32,6 +39,8 @@ public class Player : MonoBehaviour
         startRotation = transform.rotation;
         endRotation = transform.rotation;
         animator = GetComponent<Animator>();
+        soundScoreIsPlayed = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -87,6 +96,7 @@ public class Player : MonoBehaviour
         {
             MoveCharacter(currentPosition, Vector3.left);
         }
+
     }
 
     public void OnDestroy()
@@ -153,6 +163,9 @@ public class Player : MonoBehaviour
         }
 
         score = Math.Max(score, (int)currentPosition.x + 1);
+        //sound every 50 points
+        StartCoroutine(ControlScorePlayer()); 
+
         EventManager.UpdateScore(score);
         animator.SetTrigger("hop");
         isHooping = true;
@@ -171,5 +184,26 @@ public class Player : MonoBehaviour
     public void FinishHop()
     {
         isHooping = false;
+    }
+
+    IEnumerator ControlScorePlayer()
+    {
+        if ((score%50 == 0) && (score > 0))
+        {
+            if (!soundScoreIsPlayed)
+            {
+                if (sound && audioSource)
+                {
+                    audioSource.volume = OptionsMenu.volumeSound;
+                    audioSource.PlayOneShot(sound);
+                    yield return new WaitForSeconds(sound.length);
+                }
+                soundScoreIsPlayed = true;
+            }
+        }
+        else
+        {
+            soundScoreIsPlayed = false;
+        }
     }
 }
