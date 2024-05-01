@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private int score;
     private Vector3 startPosition;
     private Quaternion startRotation;
+    private float timerAntiMoveLock;
 
     private void Start()
     {
@@ -56,25 +57,33 @@ public class Player : MonoBehaviour
             }
         }
 
+        // Prevent move locking
+        timerAntiMoveLock += Time.deltaTime;
+        if (timerAntiMoveLock >= 0.5f)
+        {
+            canMove = true;
+            isHooping = false;
+        }
+
         var currentPosition = transform.position;
         if (currentPosition.y <= -1)
         {
             Destroy(gameObject);
         }
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !isHooping && canMove)
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             MoveCharacter(currentPosition, Vector3.right);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isHooping && canMove)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveCharacter(currentPosition, Vector3.forward);
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && !isHooping && canMove)
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             MoveCharacter(currentPosition, Vector3.back);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !isHooping && canMove)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveCharacter(currentPosition, Vector3.left);
         }
@@ -89,6 +98,12 @@ public class Player : MonoBehaviour
     {
         // Collision with the terrain
         canMove = true;
+
+        if(collision.gameObject.layer == blockingLayer){
+            // Recenter player when leaving a log
+            startPosition = transform.position;
+            endPosition = new Vector3((float)Math.Round(transform.position.x), transform.position.y, (float)Math.Round(transform.position.z));
+        }
 
         if (collision.collider.GetComponent<MovingObject>() != null)
         {
@@ -107,20 +122,17 @@ public class Player : MonoBehaviour
     {
         var newPosition = currentPosition + difference;
         var isMoveBlocked = IsColliding(newPosition, new Vector3(0.3f, 0.3f, 0.3f), blockingLayerMask);
-        if (isMoveBlocked)
+        if (isMoveBlocked || !canMove || isHooping || newPosition.x < -0.5)
         {
             return;
         }
 
         startPosition = currentPosition;
-        endPosition = currentPosition + difference;
-        // Block the terrain before start
-        if (endPosition.x < 0)
-        {
-            endPosition.x = 0;
-        }
+        endPosition = newPosition;
 
-        endPosition.y += 0.05f; // Make sure to leave the ground
+        // Make sure to leave the ground
+        startPosition.y += 0.04f;
+        endPosition.y += 0.04f;
 
         startRotation = transform.rotation;
         if (difference == Vector3.right)
@@ -145,6 +157,7 @@ public class Player : MonoBehaviour
         animator.SetTrigger("hop");
         isHooping = true;
         canMove = false;
+        timerAntiMoveLock = 0;
         terrainGenerator.SpawnTerrain(false, currentPosition);
     }
 
