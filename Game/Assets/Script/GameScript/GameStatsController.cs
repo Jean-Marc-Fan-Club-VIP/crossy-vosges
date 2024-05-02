@@ -33,6 +33,12 @@ namespace Script.GameScript
             DataService.SaveEntity(StatsPath, previousStats);
         }
         
+        public int GetBestScore(int level)
+        {
+            var gameStats = GetGameStats().Where(s => s.Level == level).ToList();
+            return gameStats.Count > 0 ? gameStats.Max(s => s.Score) : 0;
+        }
+        
         public RunStats[] GetHighScores(int level)
         {
             return

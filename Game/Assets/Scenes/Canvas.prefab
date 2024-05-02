@@ -308,8 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5c280976b593d4bbd292d3a5ffda36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 3994367055620894195}
-  _timer: {fileID: 6672111709625734539}
 --- !u!1 &2870892833464685466
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +320,7 @@ GameObject:
   - component: {fileID: 5574958623099985190}
   - component: {fileID: 4489470229492041331}
   m_Layer: 5
-  m_Name: Score
+  m_Name: BestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
