@@ -317,5 +317,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lilypad: {fileID: 4436858208883267714, guid: b6e2df284e484b44895b3caa334dbb93, type: 3}
   spawnPos: {fileID: 5354458280593668458}
-  minSeparationtime: 0
-  maxSeparationTime: 0
+  minNumbersLilypad: 2
+  maxNumbersLilypad: 4
