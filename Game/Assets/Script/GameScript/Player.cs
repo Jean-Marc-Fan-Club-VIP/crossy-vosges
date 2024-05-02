@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     public AudioClip sound;
     private AudioSource audioSource;
 
+    private int previousScore; 
+    private Vector3 previousPosition; 
+    private float previousTimerValue;
+    private float immobileTime = 0f;
+
 
     private void Start()
     {
@@ -46,11 +51,17 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         EventManager.ScoreUpdated += ControlScoreSound;
+        EventManager.ScoreUpdated += UpdatePreviousData;
+        EventManager.TimerUpdated += ControlPlayerMovement;
+        EventManager.TimerUpdated += ControlMoveBackPlayer;
     }
 
     private void OnDisable()
     {
         EventManager.ScoreUpdated -= ControlScoreSound;
+        EventManager.ScoreUpdated -= UpdatePreviousData;
+        EventManager.TimerUpdated -= ControlPlayerMovement;
+        EventManager.TimerUpdated -= ControlMoveBackPlayer;
     }
 
     private void Update()
@@ -213,5 +224,49 @@ public class Player : MonoBehaviour
         {
             soundScoreIsPlayed = false;
         }
+    }
+
+    private void ControlMoveBackPlayer(float timeValue)
+    {
+       if ((int)transform.position.x == (score - 4))
+        {
+            PlayerDisqualify();
+        }
+    }
+
+    private void ControlPlayerMovement(float timeValue)
+    {
+        bool hasPlayerMoved = false;
+
+        if (score != previousScore || transform.position != previousPosition)
+        {
+            hasPlayerMoved = true;
+        }
+        if (!hasPlayerMoved)
+        {
+            immobileTime += Time.deltaTime;
+            if (immobileTime >= 5f)
+            {
+                PlayerDisqualify();
+            }
+        }
+        else
+        {
+            immobileTime = 0f;
+        }
+
+        previousScore = score;
+        previousPosition = transform.position;
+    }
+
+    private void UpdatePreviousData(int scoreValue)
+    {
+        previousScore = scoreValue;
+        previousPosition = transform.position;
+    }
+
+    private void PlayerDisqualify()
+    {
+        Destroy(gameObject);
     }
 }
