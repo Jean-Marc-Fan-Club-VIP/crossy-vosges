@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AigleSpawner : MonoBehaviour
+public class EagleSpawner : MonoBehaviour
 {
-    public GameObject aigle;
+    public GameObject eagle;
     public GameObject player;
+    public AudioClip sound;
+    private AudioSource audioSource;
+
     public static bool isReady;
-    private float speed = 5f;
+    private float speed = 6f;
+    private bool soundIsPlayed = false;
 
     void Start()
     {
         transform.position = new Vector3(transform.position.x, 3f,  -1f);
         isReady = false;
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -22,6 +26,8 @@ public class AigleSpawner : MonoBehaviour
         {
             if (isReady)
             {
+                PlayEagleSound();
+
                 float deltaX = speed * Time.deltaTime;
                 transform.position += new Vector3(deltaX, 0f, 0f);
             }
@@ -29,17 +35,17 @@ public class AigleSpawner : MonoBehaviour
             {
                 transform.position = new Vector3(player.transform.position.x - 12f, 3f, -1f);
             }
+            //check if eagle has finished  its flight 
             if (transform.position.x > player.transform.position.x + 9)
             {
                 Destroy(gameObject);
                 Destroy(player);
             }
 
-            // check if player and aigle is in same x position
+            // check if player and eagle is in same x position
             int playerX = (int)player.transform.position.x;
-            int aigleX = (int)transform.position.x;
-
-            if (Mathf.Approximately(playerX, aigleX))
+            int eagleX = (int)transform.position.x + 2;
+            if (Mathf.Approximately(playerX, eagleX))
             {
                 SetPlayerTransparency(); 
             }
@@ -57,6 +63,19 @@ public class AigleSpawner : MonoBehaviour
         foreach (Renderer renderer in renderers)
         {
             renderer.enabled = false;
+        }
+    }
+
+    private void PlayEagleSound()
+    {
+        if (!soundIsPlayed)
+        {
+            if (sound && audioSource)
+            {
+                audioSource.volume = OptionsMenu.volumeSound;
+                audioSource.PlayOneShot(sound);
+            }
+            soundIsPlayed = true;
         }
     }
 }
