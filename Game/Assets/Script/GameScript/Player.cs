@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
 
     private void ControlMoveBackPlayer(float timeValue)
     {
-       if ((int)transform.position.x == (score - 4))
+       if ((int)transform.position.x == (score - 5))
         {
             PlayerDisqualify();
         }
