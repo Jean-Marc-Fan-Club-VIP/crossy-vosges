@@ -267,6 +267,6 @@ public class Player : MonoBehaviour
 
     private void PlayerDisqualify()
     {
-        Destroy(gameObject);
+        AigleSpawner.isReady = true;
     }
 }
