@@ -43,6 +43,16 @@ public class Player : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.ScoreUpdated += ControlScoreSound;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.ScoreUpdated -= ControlScoreSound;
+    }
+
     private void Update()
     {
         if (startPosition != endPosition || startRotation != endRotation)
@@ -163,8 +173,7 @@ public class Player : MonoBehaviour
         }
 
         score = Math.Max(score, (int)currentPosition.x + 1);
-        //sound every 50 points
-        StartCoroutine(ControlScoreSound()); 
+         
 
         EventManager.UpdateScore(score);
         animator.SetTrigger("hop");
@@ -186,9 +195,9 @@ public class Player : MonoBehaviour
         isHooping = false;
     }
 
-    IEnumerator ControlScoreSound()
+    void ControlScoreSound(int scoreValue)
     {
-        if ((score%50 == 0) && (score > 0))
+        if ((scoreValue%50 == 0) && (scoreValue > 0))
         {
             if (!soundScoreIsPlayed)
             {
@@ -196,7 +205,6 @@ public class Player : MonoBehaviour
                 {
                     audioSource.volume = OptionsMenu.volumeSound;
                     audioSource.PlayOneShot(sound);
-                    yield return new WaitForSeconds(sound.length);
                 }
                 soundScoreIsPlayed = true;
             }
