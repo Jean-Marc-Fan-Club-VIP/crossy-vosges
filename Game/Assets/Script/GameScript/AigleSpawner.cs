@@ -12,13 +12,8 @@ public class AigleSpawner : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(transform.position.x, 3f,  -1f);
-        
         isReady = false;
-    }
-
-    void OnDestroy()
-    {
-
+        
     }
 
     void Update()
@@ -39,6 +34,15 @@ public class AigleSpawner : MonoBehaviour
                 Destroy(gameObject);
                 Destroy(player);
             }
+
+            // check if player and aigle is in same x position
+            int playerX = (int)player.transform.position.x;
+            int aigleX = (int)transform.position.x;
+
+            if (Mathf.Approximately(playerX, aigleX))
+            {
+                SetPlayerTransparency(); 
+            }
         }
         else
         {
@@ -47,5 +51,12 @@ public class AigleSpawner : MonoBehaviour
         
     }
 
-
+    private void SetPlayerTransparency()
+    {
+        Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = false;
+        }
+    }
 }
