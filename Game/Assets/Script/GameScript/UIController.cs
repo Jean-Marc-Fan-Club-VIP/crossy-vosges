@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    private TMP_Text bestScore;
+    private int bestScore;
+    private TMP_Text bestScoreTMP;
     private GameStatsController gameStatsController;
-    private TMP_Text score;
-    private TMP_Text timer;
+    private TMP_Text scoreTMP;
+    private TMP_Text timerTMP;
     
     private void Awake()
     {
         gameStatsController = new GameStatsController();
-        bestScore = transform.Find("HLayout/BestScore").GetComponent<TMP_Text>();
-        score = transform.Find("HLayout/Panel/Score").GetComponent<TMP_Text>();
-        timer = transform.Find("HLayout/Panel/Time").GetComponent<TMP_Text>();
+        bestScoreTMP = transform.Find("HLayout/BestScore").GetComponent<TMP_Text>();
+        scoreTMP = transform.Find("HLayout/Panel/Score").GetComponent<TMP_Text>();
+        timerTMP = transform.Find("HLayout/Panel/Time").GetComponent<TMP_Text>();
     }
     
     private void Start()
     {
-        bestScore.text = $"Best: {gameStatsController.GetBestScore(LevelSelector.LevelGame())}";
+        bestScore = gameStatsController.GetBestScore(LevelSelector.LevelGame());
+        bestScoreTMP.text = $"Best: {bestScore}";
         EventManager.StartTimer();
     }
     
@@ -46,11 +48,15 @@ public class UIController : MonoBehaviour
     private void EventManagerOnTimerUpdated(float value)
     {
         var timeSpan = TimeSpan.FromSeconds(value);
-        timer.text = timeSpan.ToString(@"mm\:ss");
+        timerTMP.text = timeSpan.ToString(@"mm\:ss");
     }
     
     private void EventManagerOnScoreUpdated(int value)
     {
-        score.text = $"Score : {value}";
+        scoreTMP.text = $"Score : {value}";
+        if (value > bestScore)
+        {
+            bestScoreTMP.text = $"Best: {value}";
+        }
     }
 }
