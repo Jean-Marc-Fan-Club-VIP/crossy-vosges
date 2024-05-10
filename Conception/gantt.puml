@@ -9,6 +9,7 @@ Project starts 2023-12-04
 [Create use case diagram] starts 2023-12-04 and requires 2 days
 [Create a mockup] starts 2023-12-04 and ends 2023-12-31
 [Watch Unity tutorials] starts 2023-12-04 and requires 50 days
+[Interfaces and menus] starts at [Watch Unity tutorials]'s end and ends 2024-04-01
 [Create the class diagram] starts 2023-12-14 and ends 2023-12-23
 [Define tasks] starts 2023-12-04 and ends 2023-12-18
 [Create the Gantt diagram] starts at [Define tasks]'s end
@@ -22,24 +23,23 @@ Project starts 2023-12-04
 
 [White boxing (blocking) assets] starts at [Define tasks]'s end and ends 2024-01-12
 [Find the game theme] starts 2023-12-04 and ends 2024-01-12
+[Game audio] starts at [Find the game theme]'s end
+[Game audio] requires 30 days
 [Modelling final assets] starts at [White boxing (blocking) assets]'s end
-[Modelling final assets] requires 30 days
-
-[Interfaces and menus] starts 2023-12-04 and ends 2023-12-05
+[Modelling final assets] requires 80 days
+[Add eagle to kill player] starts at [Modelling final assets]'s end
+[Add eagle to kill player] requires 20 days
 
 [Procedural map generation] starts 2023-12-19 and ends 2024-01-31
 
 
+[Determine player's score] starts 2024-01-31 and requires 30 days
+[Game timer] starts at [Determine player's score]'s end
+[Game timer] requires 10 days
+[Coins and coin counter] starts at [Determine player's score]'s end and requires 30 days
+[Save the scores and scoreboard] starts at [Coins and coin counter]'s end and requires 30 days
 
-[Game timer] starts 2023-12-04 and ends 2023-12-05
-
-[Determine player's score] starts 2024-01-31 and requires 10 days
-[Coins and coin counter] starts at [Determine player's score]'s end and requires 10 days
-[Save the scores] starts at [Coins and coin counter]'s end and requires 10 days
-
-[Character pathfinding] starts 2023-12-04 and ends 2023-12-05
-
-[Game audio] starts 2023-12-04 and ends 2023-12-05
+[Character pathfinding] starts 2024-03-01 and ends 2024-05-01
 
 [Polish game] starts 2023-12-04 and ends 2024-05-17
 [Preparing presentation] ends 2024-05-17 and requires 15 days
