@@ -4900,6 +4900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLog: 1
+  isLocomotive: 0
   speed: 2
   leftBound: 0
   rightBound: 0
@@ -9781,6 +9782,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: f6e929e2de0ea9848bd404bae5192e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4137977c78ba7440bf920c4cbc9c77b, type: 2}
     - target: {fileID: 919132149155446097, guid: f6e929e2de0ea9848bd404bae5192e05, type: 3}
       propertyPath: m_Name
       value: Rondin
