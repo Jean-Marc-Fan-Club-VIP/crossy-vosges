@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
             isHooping = false;
         }
 
+        // Prevent from going out of the map on the sides
+        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -8f, 10f));
+
         var currentPosition = transform.position;
         if (currentPosition.y <= -1)
         {
