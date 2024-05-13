@@ -19,7 +19,7 @@ public class CoinController : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetType() == typeof(Player))
+        if (other.collider.GetComponent<Player>())
         {
             Destroy(gameObject);
         }
