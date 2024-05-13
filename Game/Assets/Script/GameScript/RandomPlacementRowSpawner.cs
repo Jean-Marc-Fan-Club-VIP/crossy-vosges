@@ -7,6 +7,7 @@ public class RandomPlacementRowSpawner : MonoBehaviour
     public Transform spawnPos;
     public int minGameobject;
     public int maxGameobject;
+    public bool isLilypad = true;
     [SerializeField] private int blockingLayer = 6;
     private readonly Collider[] colliders = new Collider[1];
     private readonly List<int> positionsAlreadyTaken = new();
@@ -18,29 +19,35 @@ public class RandomPlacementRowSpawner : MonoBehaviour
     {
         layerMask = 1 << blockingLayer;
         numberGameobject = Random.Range(minGameobject, maxGameobject);
-        AddObject(0);
+        if(isLilypad)
+        {
+            AddObject(0);
+        }
         SpawnObject();
     }
     
     private void SpawnObject()
     {
-        var randomZ = 0;
-        // var boxCliider=spawnObject.GetComponent<BoxCollider>();
+        var randomZ = Random.Range(-7, 7);
         {
             for (var i = 0; i < numberGameobject; i++)
             {
+                int maxTries = 20;
                 do
                 {
+                    maxTries--;
                     randomZ = Random.Range(-7, 7);
-                    if (!IsColliding(new Vector3(transform.position.x, 0.5f, randomZ),
-                            new Vector3(0.25f, 0.24f, 0.5f), layerMask))
+                    if (IsColliding(new Vector3(transform.position.x, 1f, randomZ),
+                            new Vector3(0.25f, 0.25f, 0.5f), layerMask))
                     {
                         positionsAlreadyTaken.Add(randomZ);
-                        break;
                     }
-                } while (IsTaken(randomZ));
-                
-                AddObject(randomZ);
+                } while (IsTaken(randomZ) && maxTries > 0);
+
+                if(maxTries>0)
+                {
+                    AddObject(randomZ);
+                }
             }
         }
     }
@@ -58,7 +65,6 @@ public class RandomPlacementRowSpawner : MonoBehaviour
         var isColliding = Physics.OverlapBoxNonAlloc(position, halfExtents, colliders,
             Quaternion.identity, mask) != 0;
         
-        Debug.Log($"isColliding: {isColliding} Position: {position}");
         return isColliding;
     }
     

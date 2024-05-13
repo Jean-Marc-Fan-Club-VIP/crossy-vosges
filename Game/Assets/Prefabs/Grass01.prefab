@@ -203,6 +203,7 @@ MonoBehaviour:
   spawnPos: {fileID: 6130611966798919010}
   minGameobject: 0
   maxGameobject: 2
+  isLilypad: 0
   blockingLayer: 6
 --- !u!1001 &1022004591531116392
 PrefabInstance:

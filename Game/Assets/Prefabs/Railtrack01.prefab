@@ -111,6 +111,7 @@ MonoBehaviour:
   spawnPos: {fileID: 1856723523308559322}
   minGameobject: 0
   maxGameobject: 1
+  isLilypad: 0
   blockingLayer: 6
 --- !u!1 &8425215363270349333
 GameObject:
