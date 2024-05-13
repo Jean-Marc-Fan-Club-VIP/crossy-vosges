@@ -9,9 +9,23 @@ package CrossyRoad {
     abstract class UI{}
     interface Scene{}
     
+    static class EventManager{
+        OnGameOver()
+        UpdateScore(int score)
+        UpdateTime(float time)
+        StartTimer()
+        StopTimer()
+    }
+
     package GameScript {
         interface GameObject{}
         class FollowPlayer{}
+        class StaticObjectSpawner{
+            AddObject()
+        }
+        class MovingObjectSpawner{
+            SpawnVehicle()
+        }
         class Player extends GameObject{
             + int score
             + bool isHooping
@@ -21,9 +35,6 @@ package CrossyRoad {
             FinishHop()
         }
         class MovingObject extends GameObject{}
-        class MovingObjectSpawner{
-            SpawnVehicle()
-        }
         class KillPlayerOnTouch{
             OnCollisionEnter(Collision collision)
             DestroyPlayerAndLoadNextScene(GameObject player)
@@ -32,6 +43,9 @@ package CrossyRoad {
         class TerrainGenerator{
             SpawnTerrain(bool isStart, Vector3 playerPos)
         }
+
+        class EagleSpawner{}
+        class PlayerKonamiCode extends GameObject{}
         
         Player -- "1" TerrainGenerator
         
@@ -80,6 +94,7 @@ package CrossyRoad {
         }
         class LevelSelector{}
         class RankMenu{}
+        class UIControler{}
     }
     MenusScript --|> MonoBehaviour
     MenusScript -- "*" UI
