@@ -43,6 +43,7 @@ public class LilypadSpawner : MonoBehaviour
         Vector3 randomPosition = new Vector3(spawnPos.position.x, 0.5f, posZ);
         Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
         var go = Instantiate(lilypad, randomPosition, randomRotation);
+        go.transform.parent = transform;
         var movingObject = go.GetComponent<MovingObject>();
     }
 
