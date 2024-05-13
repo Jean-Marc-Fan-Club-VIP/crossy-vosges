@@ -25,12 +25,19 @@ public class RandomPlacementRowSpawner : MonoBehaviour
     private void SpawnObject()
     {
         var randomZ = 0;
+        // var boxCliider=spawnObject.GetComponent<BoxCollider>();
         {
             for (var i = 0; i < numberGameobject; i++)
             {
                 do
                 {
                     randomZ = Random.Range(-7, 7);
+                    if (!IsColliding(new Vector3(transform.position.x, 0.5f, randomZ),
+                            new Vector3(0.25f, 0.24f, 0.5f), layerMask))
+                    {
+                        positionsAlreadyTaken.Add(randomZ);
+                        break;
+                    }
                 } while (IsTaken(randomZ));
                 
                 AddObject(randomZ);
@@ -46,14 +53,17 @@ public class RandomPlacementRowSpawner : MonoBehaviour
         Instantiate(spawnObject, randomPosition, randomRotation);
     }
     
+    private bool IsColliding(Vector3 position, Vector3 halfExtents, int mask)
+    {
+        var isColliding = Physics.OverlapBoxNonAlloc(position, halfExtents, colliders,
+            Quaternion.identity, mask) != 0;
+        
+        Debug.Log($"isColliding: {isColliding} Position: {position}");
+        return isColliding;
+    }
+    
     private bool IsTaken(int posZ)
     {
-        /*var position = spawnPos.position;
-        position.z = posZ;
-        var boxCollider = spawnObject.GetComponent<BoxCollider>();
-        var isColliding = Physics.OverlapBoxNonAlloc(position, boxCollider.bounds.extents, colliders,
-            Quaternion.identity, layerMask) != 0;
-        Debug.Log($"isColliding: {isColliding} Position: {position} Extents: {boxCollider.bounds.extents}");*/
         return positionsAlreadyTaken.Contains(posZ);
     }
 }
