@@ -1,8 +1,12 @@
+using Script.GameScript;
 using UnityEngine;
 
 public class CoinController : MonoBehaviour
 {
+    private static int coins;
     private Transform coinChildElement;
+    private GameStatsController gameStatsController;
+    
     
     private void Start()
     {
@@ -21,6 +25,7 @@ public class CoinController : MonoBehaviour
     {
         if (other.collider.GetComponent<Player>())
         {
+            EventManager.UpdateCoins(++coins);
             Destroy(gameObject);
         }
     }

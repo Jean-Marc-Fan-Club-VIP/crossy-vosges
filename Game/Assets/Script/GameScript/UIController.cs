@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
     private int bestScore;
     private TMP_Text bestScoreTMP;
+    private TMP_Text coinsTMP;
     private GameStatsController gameStatsController;
     private TMP_Text scoreTMP;
     private TMP_Text timerTMP;
@@ -17,6 +18,7 @@ public class UIController : MonoBehaviour
         bestScoreTMP = transform.Find("HLayout/BestScore").GetComponent<TMP_Text>();
         scoreTMP = transform.Find("HLayout/Panel/Score").GetComponent<TMP_Text>();
         timerTMP = transform.Find("HLayout/Panel/Time").GetComponent<TMP_Text>();
+        coinsTMP = transform.Find("HLayout/Panel/Coins").GetComponent<TMP_Text>();
     }
     
     private void Start()
@@ -31,6 +33,7 @@ public class UIController : MonoBehaviour
         EventManager.ScoreUpdated += EventManagerOnScoreUpdated;
         EventManager.TimerUpdated += EventManagerOnTimerUpdated;
         EventManager.GameOver += EventManagerOnGameOver;
+        EventManager.CoinsUpdated += EventManagerOnCoinsUpdated;
     }
     
     private void OnDisable()
@@ -38,6 +41,12 @@ public class UIController : MonoBehaviour
         EventManager.ScoreUpdated -= EventManagerOnScoreUpdated;
         EventManager.TimerUpdated -= EventManagerOnTimerUpdated;
         EventManager.GameOver -= EventManagerOnGameOver;
+        EventManager.CoinsUpdated -= EventManagerOnCoinsUpdated;
+    }
+    
+    private void EventManagerOnCoinsUpdated(int coins)
+    {
+        coinsTMP.text = $"Coins: {coins}";
     }
     
     private void EventManagerOnGameOver()
