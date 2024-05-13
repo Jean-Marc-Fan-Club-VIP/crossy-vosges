@@ -5,6 +5,7 @@ using UnityEngine;
 public class LilypadSpawner : MonoBehaviour
 {
     public GameObject lilypad;
+    public GameObject gameObjectParent;
     public Transform spawnPos;
     public int minNumbersLilypad;
     public int maxNumbersLilypad;
@@ -43,6 +44,7 @@ public class LilypadSpawner : MonoBehaviour
         Vector3 randomPosition = new Vector3(spawnPos.position.x, 0.5f, posZ);
         Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
         var go = Instantiate(lilypad, randomPosition, randomRotation);
+        go.transform.parent = gameObjectParent.transform;
         var movingObject = go.GetComponent<MovingObject>();
     }
 
