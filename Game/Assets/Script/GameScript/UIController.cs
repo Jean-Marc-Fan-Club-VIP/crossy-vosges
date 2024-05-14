@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
         bestScoreTMP = transform.Find("HLayout/BestScore").GetComponent<TMP_Text>();
         scoreTMP = transform.Find("HLayout/Panel/Score").GetComponent<TMP_Text>();
         timerTMP = transform.Find("HLayout/Panel/Time").GetComponent<TMP_Text>();
-        coinsTMP = transform.Find("HLayout/Panel/Coins").GetComponent<TMP_Text>();
+        coinsTMP = transform.Find("HLayout/Panel/CoinsLayout/Coins").GetComponent<TMP_Text>();
     }
     
     private void Start()
@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
     
     private void EventManagerOnCoinsUpdated(int coins)
     {
-        coinsTMP.text = $"Coins: {coins}";
+        coinsTMP.text = coins.ToString();
     }
     
     private void EventManagerOnGameOver()
