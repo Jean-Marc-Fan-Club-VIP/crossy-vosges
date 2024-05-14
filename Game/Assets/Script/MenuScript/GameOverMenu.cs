@@ -84,6 +84,7 @@ public class GameOverMenu : MonoBehaviour
         }
         
         previousStats[OptionsMenu.PlayerName].RunsStats.Add(stats);
+        previousStats[OptionsMenu.PlayerName].Coins = CoinController.Coins;
         var rank = gameStatsController.GetAllRuns().OrderByDescending(rs => rs.Value.Score)
             .ToList()
             .FindIndex(rs => rs.Value.Score <= stats.Score) + 1;
