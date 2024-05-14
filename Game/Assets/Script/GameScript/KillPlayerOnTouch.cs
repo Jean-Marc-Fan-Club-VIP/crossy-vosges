@@ -22,6 +22,8 @@ public class KillPlayerOnTouch : MonoBehaviour
 
    IEnumerator DestroyPlayerAndLoadNextScene(GameObject player)
     {
+        player.GetComponent<Explosion>().Explode();
+        
         Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)
         {
