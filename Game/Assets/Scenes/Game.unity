@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,44 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!84 &41748061
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!114 &51584797 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1774469359822833906, guid: 709c8873dad3961448e77b8f23d4ec6c, type: 3}
@@ -893,7 +931,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass01 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5985530497570103821, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 721703154200534112, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     - {fileID: 3827310787439086302, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
@@ -974,7 +1013,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass01 (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5985530497570103821, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 721703154200534112, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     - {fileID: 3827310787439086302, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
@@ -1064,7 +1104,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass01 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5985530497570103821, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 721703154200534112, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     - {fileID: 3827310787439086302, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
@@ -2496,7 +2537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb95d7684b6c33d4d9981037226987c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eagle: {fileID: 1815064666}
   player: {fileID: 839503623197125407}
   sound: {fileID: 8300000, guid: b387ba4c9c850a24e8413f494de15bf0, type: 3}
 --- !u!1001 &2007310399
@@ -2688,44 +2728,6 @@ Transform:
   - {fileID: 135412470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &2062417843
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &2079922777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2798,7 +2800,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5985530497570103821, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5305145655514208321, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
     - {fileID: 832320729588367896, guid: 06102c7538f8e3a4e96550f1d9db06e0, type: 3}
@@ -3185,7 +3188,7 @@ PrefabInstance:
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Cookie
       value: 
-      objectReference: {fileID: 2062417843}
+      objectReference: {fileID: 41748061}
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Color.b
       value: 0.5137255
