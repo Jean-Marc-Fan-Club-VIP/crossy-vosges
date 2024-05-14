@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerKonamiCode : MonoBehaviour
 {
     public GameObject defaultObject;
-    public GameObject konamiObject;
-
-    private bool isKonamiCodeActive = false;
+    public GameObject[] konamiObjects;
+    private int konamiCodeIndex = 0;
 
     private List<char> konamiCode = new List<char> { 'U', 'U', 'D', 'D', 'L', 'R', 'L', 'R', 'B', 'A' };
     private List<char> performedAction = new List<char>();
@@ -32,19 +31,23 @@ public class PlayerKonamiCode : MonoBehaviour
 
     void PerformKonamiCode()
     {
-        if(!isKonamiCodeActive)
+        if(konamiCodeIndex == 1)
         {
-            isKonamiCodeActive = true;
-
             defaultObject.SetActive(false);
-            konamiObject.SetActive(true);
+            konamiObjects[0].SetActive(true);
+            konamiObjects[1].SetActive(false);
         }
-        
+        else if (konamiCodeIndex == 2)
+        {
+            defaultObject.SetActive(false);
+            konamiObjects[0].SetActive(false);
+            konamiObjects[1].SetActive(true);
+        }
     }
 
     void Update()
     {
-        if (Input.anyKeyDown && !isKonamiCodeActive)
+        if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -80,6 +83,8 @@ public class PlayerKonamiCode : MonoBehaviour
             {
                 if (CheckKonamiCode())
                 {
+                    konamiCodeIndex++;
+                    performedAction.Clear();
                     PerformKonamiCode();
                 }
             }

@@ -57,7 +57,8 @@ public class RandomPlacementRowSpawner : MonoBehaviour
         positionsAlreadyTaken.Add(posZ);
         var randomPosition = new Vector3(spawnPos.position.x, 0.5f, posZ);
         var randomRotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
-        Instantiate(spawnObject, randomPosition, randomRotation);
+        var go = Instantiate(spawnObject, randomPosition, randomRotation);
+        go.transform.parent = transform;
     }
     
     private bool IsColliding(Vector3 position, Vector3 halfExtents, int mask)

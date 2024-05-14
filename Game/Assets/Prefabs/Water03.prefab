@@ -315,7 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a26e1a3b3f5e14fbfee0285085c751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 4436858208883267714, guid: b6e2df284e484b44895b3caa334dbb93, type: 3}
+  spawnObject: {fileID: 4436858208883267714, guid: b6e2df284e484b44895b3caa334dbb93,
+    type: 3}
+  gameObjectParent: {fileID: 7865467790256990740}
   spawnPos: {fileID: 5354458280593668458}
   minGameobject: 2
   maxGameobject: 4
