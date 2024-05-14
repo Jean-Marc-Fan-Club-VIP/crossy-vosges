@@ -7,7 +7,7 @@ public class JsonDataService : IDataService
     public void SaveEntity<T>(string path, T entity)
     {
         var entityPath = Path.Join(Application.persistentDataPath, path);
-        File.WriteAllText(entityPath, JsonConvert.SerializeObject(entity));
+        File.WriteAllText(entityPath, JsonConvert.SerializeObject(entity, Formatting.Indented));
     }
 
     public T LoadEntity<T>(string path)
