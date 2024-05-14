@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3208548665541088426}
   - component: {fileID: 2043982012259703787}
   - component: {fileID: 2082039579502997701}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2246218840178424204}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PouletContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,8 +224,16 @@ PrefabInstance:
       value: Vache
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4a2549db76fcc2c4cbf14cf2e1bac335, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a2549db76fcc2c4cbf14cf2e1bac335, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 4a2549db76fcc2c4cbf14cf2e1bac335, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -307,8 +315,16 @@ PrefabInstance:
       value: Poulet
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9042713ed016bd04e902b6f1cd3991d1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9042713ed016bd04e902b6f1cd3991d1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 9042713ed016bd04e902b6f1cd3991d1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

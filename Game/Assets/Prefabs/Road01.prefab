@@ -146,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2607003007233000706}
   - component: {fileID: 251218775924659124}
+  - component: {fileID: 9077608655558551482}
   m_Layer: 0
   m_Name: Road01
   m_TagString: Untagged
@@ -190,3 +191,21 @@ MonoBehaviour:
   minSeparationtime: 3
   maxSeparationTime: 5
   isRightSide: 1
+--- !u!114 &9077608655558551482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5652035165361956015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a26e1a3b3f5e14fbfee0285085c751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnObject: {fileID: 292459394249460966, guid: 694e7c00fb945464bae3742fb279643d, type: 3}
+  spawnPos: {fileID: 2607003007233000706}
+  minGameobject: 0
+  maxGameobject: 2
+  isLilypad: 0
+  blockingLayer: 6

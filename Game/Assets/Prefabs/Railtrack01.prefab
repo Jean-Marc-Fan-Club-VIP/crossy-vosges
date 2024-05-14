@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1856723523308559322}
   - component: {fileID: 4066156362493508334}
+  - component: {fileID: 6330987367047211803}
   m_Layer: 0
   m_Name: Railtrack01
   m_TagString: Untagged
@@ -94,6 +95,24 @@ MonoBehaviour:
   minSeparationtime: 8
   maxSeparationTime: 16
   isRightSide: 1
+--- !u!114 &6330987367047211803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238775192845663920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a26e1a3b3f5e14fbfee0285085c751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnObject: {fileID: 292459394249460966, guid: 694e7c00fb945464bae3742fb279643d, type: 3}
+  spawnPos: {fileID: 1856723523308559322}
+  minGameobject: 0
+  maxGameobject: 1
+  isLilypad: 0
+  blockingLayer: 6
 --- !u!1 &8425215363270349333
 GameObject:
   m_ObjectHideFlags: 0

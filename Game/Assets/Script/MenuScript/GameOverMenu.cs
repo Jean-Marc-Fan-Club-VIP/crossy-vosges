@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Script.GameScript;
 using TMPro;
@@ -77,11 +78,16 @@ public class GameOverMenu : MonoBehaviour
     private void SaveStats()
     {
         var previousStats = gameStatsController.GetGameStats();
-        stats.Name = OptionsMenu.PlayerName;
-        previousStats.Add(stats);
-        var rank = previousStats.Where(rs => rs.Level == LevelSelector.LevelGame()).OrderByDescending(rs => rs.Score)
+        if (!previousStats.ContainsKey(OptionsMenu.PlayerName))
+        {
+            previousStats[OptionsMenu.PlayerName] = new PlayerStats { RunsStats = new List<RunStats>() };
+        }
+        
+        previousStats[OptionsMenu.PlayerName].RunsStats.Add(stats);
+        previousStats[OptionsMenu.PlayerName].Coins = CoinController.Coins;
+        var rank = gameStatsController.GetAllRuns().OrderByDescending(rs => rs.Value.Score)
             .ToList()
-            .FindIndex(rs => rs.Score <= stats.Score) + 1;
+            .FindIndex(rs => rs.Value.Score <= stats.Score) + 1;
         rankText.SetText($"Your rank: #{rank}");
         GameStatsController.SaveGameStats(previousStats);
     }

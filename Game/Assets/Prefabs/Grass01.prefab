@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1197241354170236450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6130611966798919010}
+  m_Layer: 0
+  m_Name: CoinSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6130611966798919010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197241354170236450}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5697112585280687122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4545448868976533082
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5697112585280687122}
+  - component: {fileID: 5985530497570103821}
   m_Layer: 0
   m_Name: Grass01
   m_TagString: Untagged
@@ -152,8 +184,27 @@ Transform:
   - {fileID: 8696129144771109434}
   - {fileID: 696424729417069259}
   - {fileID: 5337074935079753002}
+  - {fileID: 6130611966798919010}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5985530497570103821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854037009221577632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a26e1a3b3f5e14fbfee0285085c751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnObject: {fileID: 292459394249460966, guid: 694e7c00fb945464bae3742fb279643d, type: 3}
+  spawnPos: {fileID: 6130611966798919010}
+  minGameobject: 0
+  maxGameobject: 2
+  isLilypad: 0
+  blockingLayer: 6
 --- !u!1001 &1022004591531116392
 PrefabInstance:
   m_ObjectHideFlags: 0
