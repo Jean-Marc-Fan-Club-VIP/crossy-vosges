@@ -12,39 +12,49 @@ namespace Script.GameScript
         private static readonly IDataService DataService = new JsonDataService();
         
         
-        public List<RunStats> GetGameStats()
+        public Dictionary<string, PlayerStats> GetGameStats()
         {
-            List<RunStats> previousStats;
+            Dictionary<string, PlayerStats> previousStats;
             try
             {
-                previousStats = DataService.LoadEntity<List<RunStats>>(StatsPath);
+                previousStats = DataService.LoadEntity<Dictionary<string, PlayerStats>>(StatsPath);
             }
             catch (Exception e)
             {
                 Debug.Log($"{e}. Creating a new stat file");
-                previousStats = new List<RunStats>();
+                previousStats = new Dictionary<string, PlayerStats>();
             }
             
             return previousStats;
         }
         
-        public static void SaveGameStats(List<RunStats> previousStats)
+        public static void SaveGameStats(Dictionary<string, PlayerStats> previousStats)
         {
             DataService.SaveEntity(StatsPath, previousStats);
         }
         
         public int GetBestScore(int level)
         {
-            var gameStats = GetGameStats().Where(s => s.Level == level).ToList();
-            return gameStats.Count > 0 ? gameStats.Max(s => s.Score) : 0;
+            return GetAllRuns()
+                .Where(run => run.Value.Level == level)
+                .Select(run => run.Value.Score)
+                .DefaultIfEmpty(0)
+                .Max();
         }
         
-        public RunStats[] GetHighScores(int level)
+        public IEnumerable<KeyValuePair<string, RunStats>> GetAllRuns()
         {
-            return
-                (from stat in GetGameStats() orderby stat.Score descending where stat.Level == level select stat)
-                .Take(TableSize)
-                .ToArray();
+            return GetGameStats().SelectMany(player => player.Value.RunsStats
+                .Select(runStats => new KeyValuePair<string, RunStats>(player.Key, runStats)));
+        }
+        
+        
+        public IEnumerable<KeyValuePair<string, RunStats>> GetBestRuns(int level)
+        {
+            return GetAllRuns()
+                .Where(run => run.Value.Level == level)
+                .OrderByDescending(run => run.Value.Score)
+                .Take(TableSize);
         }
     }
 }

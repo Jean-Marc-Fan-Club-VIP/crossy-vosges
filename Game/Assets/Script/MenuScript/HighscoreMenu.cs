@@ -33,15 +33,17 @@ public class HighscoreMenu : MonoBehaviour
     
     private void DisplayScores(int level)
     {
-        var highscores = gameStatsController.GetHighScores(level);
+        var bestRuns = gameStatsController.GetBestRuns(level);
         DestroyRows();
-        for (ushort i = 0; i < highscores.Length; i++)
+        short i = 0;
+        foreach (var (playerName, stats) in bestRuns)
         {
             var row = Instantiate(rowTemplate, table);
             row.gameObject.SetActive(true);
             row.Find("Rank").GetComponent<TMP_Text>().SetText((i + 1).ToString());
-            row.Find("Score").GetComponent<TMP_Text>().SetText(highscores[i].Score.ToString());
-            row.Find("Name").GetComponent<TMP_Text>().SetText(highscores[i].Name);
+            row.Find("Score").GetComponent<TMP_Text>().SetText(stats.Score.ToString());
+            row.Find("Name").GetComponent<TMP_Text>().SetText(playerName);
+            i++;
         }
     }
     
