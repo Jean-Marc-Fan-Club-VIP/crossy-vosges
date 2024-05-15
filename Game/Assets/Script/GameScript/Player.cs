@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     private Vector3 previousPosition; 
     private float previousTimerValue;
     private float immobileTime = 0f;
+    private Vector2 mobileStartTouchPosition;
+    private Vector2 mobileEndTouchPosition;
 
 
     private void Start()
@@ -104,21 +106,63 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Z))
         {
             MoveCharacter(currentPosition, Vector3.right);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q))
         {
             MoveCharacter(currentPosition, Vector3.forward);
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             MoveCharacter(currentPosition, Vector3.back);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             MoveCharacter(currentPosition, Vector3.left);
+        }
+
+        else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            // Mobile controls
+            mobileStartTouchPosition = Input.GetTouch(0).position;
+        }
+        else if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            // Mobile controls
+            mobileEndTouchPosition = Input.GetTouch(0).position;
+
+            var difference = mobileEndTouchPosition - mobileStartTouchPosition;
+            if (difference.magnitude > 25)
+            {
+                if (Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
+                {
+                    if (difference.x > 0)
+                    {
+                        MoveCharacter(currentPosition, Vector3.back);
+                    }
+                    else
+                    {
+                        MoveCharacter(currentPosition, Vector3.forward);
+                    }
+                }
+                else
+                {
+                    if (difference.y > 0)
+                    {
+                        MoveCharacter(currentPosition, Vector3.right);
+                    }
+                    else
+                    {
+                        MoveCharacter(currentPosition, Vector3.left);
+                    }
+                }
+            }
+            else
+            {
+                MoveCharacter(currentPosition, Vector3.right);
+            }
         }
 
     }
