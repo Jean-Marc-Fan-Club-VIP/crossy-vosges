@@ -1,11 +1,17 @@
-using Script.GameScript;
+﻿using Script.GameScript;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CoinController : MonoBehaviour
 {
     private Transform coinChildElement;
     private GameStatsController gameStatsController;
-    
+    public AudioClip sound;
+    private AudioSource audioSource;
+    private Renderer coinRenderer;
+    private Color originalColor;
+
     public static int Coins { get; private set; }
     
     private void Awake()
@@ -16,6 +22,7 @@ public class CoinController : MonoBehaviour
     
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         coinChildElement = transform.Find("CoinContainer");
         var stats = gameStatsController.GetGameStats();
         if (stats.TryGetValue(OptionsMenu.PlayerName, out var stat))
@@ -38,7 +45,29 @@ public class CoinController : MonoBehaviour
         if (other.collider.GetComponent<Player>())
         {
             EventManager.UpdateCoins(++Coins);
-            Destroy(gameObject);
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            if (boxCollider != null)
+            {
+                boxCollider.enabled = false;
+            }
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+            StartCoroutine(PlaySoundAndDestroyCoin());
         }
+    }
+
+    private IEnumerator PlaySoundAndDestroyCoin()
+    {
+        if (sound && audioSource)
+        {
+            audioSource.volume = OptionsMenu.volumeSound;
+            audioSource.PlayOneShot(sound);
+            
+            yield return new WaitForSeconds(sound.length);
+        }
+        Destroy(gameObject);
     }
 }
