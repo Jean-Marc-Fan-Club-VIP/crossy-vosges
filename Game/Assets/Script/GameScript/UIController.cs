@@ -15,16 +15,16 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         gameStatsController = new GameStatsController();
-        bestScoreTMP = transform.Find("HLayout/BestScore").GetComponent<TMP_Text>();
-        scoreTMP = transform.Find("HLayout/Panel/Score").GetComponent<TMP_Text>();
-        timerTMP = transform.Find("HLayout/Panel/Time").GetComponent<TMP_Text>();
-        coinsTMP = transform.Find("HLayout/Panel/CoinsLayout/Coins").GetComponent<TMP_Text>();
+        bestScoreTMP = transform.Find("BestScore").GetComponent<TMP_Text>();
+        scoreTMP = transform.Find("Score").GetComponent<TMP_Text>();
+        timerTMP = transform.Find("Time").GetComponent<TMP_Text>();
+        coinsTMP = transform.Find("CoinsLayout/Coins").GetComponent<TMP_Text>();
     }
     
     private void Start()
     {
         bestScore = gameStatsController.GetBestScore(LevelSelector.LevelGame());
-        bestScoreTMP.text = $"Best: {bestScore}";
+        bestScoreTMP.text = $"{bestScore}";
         EventManager.StartTimer();
     }
     
@@ -62,10 +62,10 @@ public class UIController : MonoBehaviour
     
     private void EventManagerOnScoreUpdated(int value)
     {
-        scoreTMP.text = $"Score : {value}";
+        scoreTMP.text = $"{value}";
         if (value > bestScore)
         {
-            bestScoreTMP.text = $"Best: {value}";
+            bestScoreTMP.gameObject.SetActive(false);
         }
     }
 }
