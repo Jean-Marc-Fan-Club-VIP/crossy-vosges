@@ -581,7 +581,7 @@ PrefabInstance:
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Cookie
       value: 
-      objectReference: {fileID: 117636109}
+      objectReference: {fileID: 309280368}
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Color.b
       value: 0.5137255
@@ -1083,44 +1083,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a12627c894802804c8f09b2e0de363dd, type: 3}
---- !u!84 &117636109
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &125681551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2687,6 +2649,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304461210}
   m_CullTransparentMesh: 1
+--- !u!84 &309280368
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &324734687
 GameObject:
   m_ObjectHideFlags: 0
@@ -13181,9 +13181,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 539908460}
     m_Modifications:
+    - target: {fileID: 575034107492235679, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 575034107492235679, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 575034107492235679, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.48
+      objectReference: {fileID: 0}
     - target: {fileID: 1203574821615852157, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
       propertyPath: m_Name
       value: OptionsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203574821615852157, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368688795064627085, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3368688795064627085, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4541004576370867839, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -13268,6 +13292,14 @@ PrefabInstance:
     - target: {fileID: 5087643370265751618, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860356898823918070, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 941657221}
+    - target: {fileID: 8860356898823918070, guid: 909066ccfd55c0d4f9a55c1da63edd66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
