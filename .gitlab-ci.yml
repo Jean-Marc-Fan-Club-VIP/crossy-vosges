@@ -2,7 +2,6 @@ stages:
   - prepare
   - build_and_test
   - deploy
-  - release
 
 # If you are looking for a place where to add 'UNITY_LICENSE_FILE' and other secrets, please visit your project's gitlab page:
 # settings > CI/CD > Variables instead
@@ -73,6 +72,11 @@ get-activation-file:
   <<: *unity_defaults
   script:
     - chmod +x ./ci/build.sh && ./ci/build.sh
+  artifacts:
+    paths:
+      - $UNITY_DIR/Builds/
+  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
+  # you may need to remove or replace these to fit your need if you are using your own runners
   tags:
     - gitlab-org
 
@@ -80,42 +84,18 @@ build-StandaloneLinux64:
   <<: *build
   variables:
     BUILD_TARGET: StandaloneLinux64
-  after_script:
-    - zip -r StandaloneLinux64.zip $UNITY_DIR/Builds/StandaloneLinux64
-    - echo "JOB_LINUX_ID=$CI_JOB_ID" >> build_ids.env
-  artifacts:
-    paths:
-      - StandaloneLinux64.zip
-    reports:
-      dotenv: build_ids.env
 
 build-StandaloneOSX:
   <<: *build
   image: $IMAGE:$UNITY_VERSION-mac-mono-$IMAGE_VERSION
   variables:
     BUILD_TARGET: StandaloneOSX
-  after_script:
-    - zip -r StandaloneOSX.zip $UNITY_DIR/Builds/StandaloneOSX
-    - echo "JOB_MACOS_ID=$CI_JOB_ID" >> build_ids.env
-  artifacts:
-    paths:
-      - StandaloneOSX.zip
-    reports:
-      dotenv: build_ids.env
 
 build-StandaloneWindows64:
   <<: *build
   image: $IMAGE:$UNITY_VERSION-windows-mono-$IMAGE_VERSION
   variables:
     BUILD_TARGET: StandaloneWindows64
-  after_script:
-    - zip -r StandaloneWindows64.zip $UNITY_DIR/Builds/StandaloneWindows64
-    - echo "JOB_WINDOWS_ID=$CI_JOB_ID" >> build_ids.env
-  artifacts:
-    paths:
-      - StandaloneWindows64.zip
-    reports:
-      dotenv: build_ids.env
 
 pages:
   image: alpine:latest
@@ -127,30 +107,6 @@ pages:
       - public
   only:
     - release
-  
-release_job:
-  stage: release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - source build_ids.env
-    - echo "running release_job"
-  needs:
-    - job: build-job
-      artifacts: true
-  release:
-    name:  'Crossy-Vosges $CI_COMMIT_TAG'
-    tag_name: '$CI_COMMIT_TAG'
-    description: '$CI_COMMIT_TAG_MESSAGE'
-    assets: 
-      links:
-        - name: 'Windows'
-          url: '${CI_PROJECT_URL}/-/jobs/${JOB_WINDOWS_ID}/artifacts/file/StandaloneWindows64.zip'
-        - name: 'MacOS'
-          url: '${CI_PROJECT_URL}/-/jobs/${JOB_WINDOWS_ID}/artifacts/file/StandaloneOSX.zip'
-        - name: 'Linux'
-          url: '${CI_PROJECT_URL}/-/jobs/${JOB_WINDOWS_ID}/artifacts/file/StandaloneLinux64.zip'
 
 workflow:
   rules:
