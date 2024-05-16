@@ -32,7 +32,7 @@
 
 ## Jouer au jeu
 
-Une version compilée du jeu est disponible dans le dossier [Build](./Build/) sur la branche `release` du dépôt.
+Une version compilée du jeu est disponible dans les [Releases](https://gitlab.com/cnam-isi1-poo-methodo-si/crossy-road/-/releases) GitLab aini que dans les [Builds](https://gitlab.com/cnam-isi1-poo-methodo-si/crossy-road/-/jobs).
 
 ## Développement
 
