@@ -432,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Cookie
       value: 
-      objectReference: {fileID: 510808756}
+      objectReference: {fileID: 776909719}
     - target: {fileID: 6630332212418776095, guid: 50869b7e102274c4faacca58f083787c, type: 3}
       propertyPath: m_Color.b
       value: 0.5137255
@@ -4085,44 +4085,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600cd2d1a6fee674691384ad0a6916b5, type: 3}
---- !u!84 &510808756
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1024
-  m_Height: 1024
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &539908456
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,6 +5093,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2889184580786643964, guid: fc053961758257f4a922b60e2a619f2a, type: 3}
   m_PrefabInstance: {fileID: 704783183}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &776909719
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1024
+  m_Height: 1024
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &779211748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11576,7 +11576,7 @@ GameObject:
   - component: {fileID: 1722390461}
   - component: {fileID: 1722390460}
   m_Layer: 5
-  m_Name: QuitButton
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11600,7 +11600,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -228}
-  m_SizeDelta: {x: 170.8, y: 30}
+  m_SizeDelta: {x: 111.76, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1722390460
 MonoBehaviour:
@@ -11648,7 +11648,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 941657223}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12636,7 +12636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e30ed81a0d13da4aa7f40e3fa2b3952, type: 2}
   m_sharedMaterial: {fileID: -7718813020063996789, guid: 9e30ed81a0d13da4aa7f40e3fa2b3952, type: 2}
