@@ -11,7 +11,8 @@ public class FollowPlayer : MonoBehaviour
     {
         if (player)
         {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, smoothness);
+            Vector3 playerPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z / 1.5f);
+            transform.position = Vector3.Lerp(transform.position, playerPosition + offset, smoothness);
         }
     }
 }
