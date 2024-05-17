@@ -3,15 +3,12 @@ stages:
   - build_and_test
   - deploy
 
-# If you are looking for a place where to add 'UNITY_LICENSE_FILE' and other secrets, please visit your project's gitlab page:
-# settings > CI/CD > Variables instead
 variables:
   BUILD_NAME: CrossyVosges
   UNITY_ACTIVATION_FILE: ./unity3d.alf
-  IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
+  IMAGE: unityci/editor
   IMAGE_VERSION: 3
   UNITY_DIR: $CI_PROJECT_DIR/Game
-  # You can expose this in Unity via Application.version
   VERSION_NUMBER_VAR: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_JOB_ID
   VERSION_BUILD_VAR: $CI_PIPELINE_IID
 
@@ -52,8 +49,6 @@ get-unity-version:
     - *cache
     - *license
 
-# run this job when you need to request a license
-# you may need to follow activation steps from documentation
 get-activation-file:
   <<: *unity_before_script
   rules:
@@ -65,7 +60,7 @@ get-activation-file:
   artifacts:
     paths:
       - $UNITY_ACTIVATION_FILE
-    expire_in: 10 min # Expiring this as artifacts may contain sensitive data and should not be kept public
+    expire_in: 10 min
 
 .build: &build
   stage: build_and_test
@@ -75,8 +70,6 @@ get-activation-file:
   artifacts:
     paths:
       - $UNITY_DIR/Builds/
-  # https://gitlab.com/gableroux/unity3d-gitlab-ci-example/-/issues/83
-  # you may need to remove or replace these to fit your need if you are using your own runners
   tags:
     - gitlab-org
 
@@ -106,7 +99,7 @@ pages:
     paths:
       - public
   only:
-    - release
+    - main
 
 workflow:
   rules:
