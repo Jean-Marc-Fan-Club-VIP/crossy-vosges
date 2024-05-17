@@ -30,6 +30,10 @@
 ![Diagramme de cas d'utilisation (jeu)](./Conception/usecase-jeu.png)
 ![Diagramme de cas d'utilisation (game over)](./Conception/usecase-game-over.png)
 
+## Organisation des tâches
+
+Afin de répartir et planifier les tâches, nous avons utilisé l'interface [Kanban](https://gitlab.com/cnam-isi1-poo-methodo-si/crossy-road/-/boards) de GitLab.
+
 ## Jouer au jeu
 
 Une version compilée du jeu est disponible dans les [Releases](https://gitlab.com/cnam-isi1-poo-methodo-si/crossy-road/-/releases) GitLab aini que dans les [Builds](https://gitlab.com/cnam-isi1-poo-methodo-si/crossy-road/-/jobs).
