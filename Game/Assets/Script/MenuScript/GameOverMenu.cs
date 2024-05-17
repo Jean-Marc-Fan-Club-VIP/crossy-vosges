@@ -88,7 +88,7 @@ public class GameOverMenu : MonoBehaviour
         var rank = gameStatsController.GetAllRuns().OrderByDescending(rs => rs.Value.Score)
             .ToList()
             .FindIndex(rs => rs.Value.Score <= stats.Score) + 1;
-        rankText.SetText($"Your rank: #{rank}");
+        rankText.SetText($"Your rank:{rank}");
         GameStatsController.SaveGameStats(previousStats);
     }
     
