@@ -73,6 +73,13 @@ get-activation-file:
   tags:
     - gitlab-org
 
+build-android:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-android-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: Android
+    BUILD_APP_BUNDLE: "false"
+
 build-StandaloneLinux64:
   <<: *build
   variables:
